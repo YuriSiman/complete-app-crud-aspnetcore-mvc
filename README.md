@@ -83,6 +83,10 @@ Projeto - Camada Data
 
 ## Definir as entidades da aplicação
 
+Modelo Entidade-Relacionamento conforme a utilização do Entity Framework.
+
+<img src="./readme-images/entidade-relacionamento.png" />
+
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
 ---
