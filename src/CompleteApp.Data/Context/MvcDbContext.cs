@@ -10,7 +10,7 @@ namespace CompleteApp.Data.Context
 {
     public class MvcDbContext : DbContext
     {
-        public MvcDbContext(DbContextOptions options) : base(options) { }
+        public MvcDbContext(DbContextOptions<MvcDbContext> options) : base(options) { }
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
