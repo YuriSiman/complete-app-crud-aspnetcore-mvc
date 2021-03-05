@@ -25,7 +25,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Configurar seu DbContext](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-seu-dbcontext)  
 - [x] [Configurar o mapeamento de suas entidades com FluentAPI](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-o-mapeamento-de-suas-entidades-com-fluentapi)  
 - [x] [Gerar Migrations, Data Base e Scripts](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#gerar-migrations-data-base-e-scripts)  
-
+- [x] [Repository Pattern](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#repository-pattern)  
 
 ---
 
@@ -102,11 +102,17 @@ No método OnModelCreating também podemos **desabilitar** o **Cascade Delete**,
 
 #### Configurando seu DbContext na sua classe Startup
 
-É necessário configurar seu contexto de dados dentro da sua classe Startup. Segue exemplo de implementação abaixo:
+É necessário configurar o serviço do seu contexto de dados dentro da sua classe Startup, no método ConfigureServices. Segue exemplo de implementação abaixo:
 
 ```
 services.AddDbContext<SeuDbContext>(options =>
        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+```
+
+Também é preciso configurar o serviço para injeção de dependência do seu DbContext na classe Startup, no método ConfigureServices, conforme implementação abaixo:
+
+```
+services.AddScoped<SeuDbContext>();
 ```
 
 #### Configurando o arquivo appsettings.json
@@ -115,7 +121,7 @@ Após a implementação do DbContext na Startup, é necessário passar as inform
 
 ```
 "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=CompleteApp;Trusted_Connection=True;MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SeuDb;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
 ```
 
@@ -133,24 +139,68 @@ Mapeando as entidades para o banco de dados com o FluentApi, é o ideal para nã
 
 ## Gerar Migrations, Data Base e Scripts
 
-Gerando pelo Package Manager Console
+Package Manager Console  
 
-Gerando Migrations
+Gerando Migrations  
 
 ```
 Add-Migration NomeMigration -Context SeuDbContext
 ```
 
-Gerando Base de Dados
+Gerando Base de Dados  
 
 ```
 Update-Database -Context SeuDbContext
 ```
 
-Gerando Scripts Idempotentes
+Gerando Scripts Idempotentes  
 
 ```
 Script-Migration -Idempotent
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Repository Pattern
+
+O repository pattern é implementado nesta aplicação para que as camadas de Business e App possuam um meio de acesso para conversar com o banco de dados, que não seja diretamente pelo DbContext, pois, não é adequado injetar o DbContext diretamente nas Controllers, devemos sempre buscar o desacoplamento do meio de acesso a dados.  
+
+#### IRepository - Camada Business
+
+Devemos criar a interface genérica IRepository<TEntity> dentro da camada de Negócios **(Business)** para que a camada de Negócios não tenha nenhuma referência com a camada de Dados **(Data)**, ela irá "conversar" com a camada de dados por meio da interface IRepository<TEntity>, para que ela possa fornecer os métodos necessários para os repositórios que ficarão na camada de dados.  
+Esta interface deverá implementar a interface **IDisposable** para obrigar que o repositório faça a liberação de memória. Outro detalhe é o fato de podermos configurar para que a interface IRepository<TEntity> apenas seja utilizada por entidades que sejam filhas (que herdem) da classe **Entity**.
+
+Seguem os métodos assíncronos a serem implementados na interface genérica:
+
+```
+Task Adicionar(TEntity entity);
+Task<TEntity> ObterPorId(Guid id);
+Task<List<TEntity>> ObterTodos();
+Task Atualizar(TEntity entity);
+Task Remover(Guid id);
+Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
+Task<int> SaveChanges();
+```
+
+Agora deve-se criar as interfaces referentes a cada entidade que será persistida no banco de dados da sua aplicação, e cada uma delas deverá implementar a interface genérica **IRepository**. Isso nos dará uma maior autonomia para manipular dados de forma independente para cada entidade.  
+
+#### Repository - Camada Data
+
+Criando classe abstrata e genérica Repository<TEntity> implementando a interface genérica IRepository<TEntity>, onde a entidade TEntity precisar ser filha (herdar) da entidade abstrata **Entity**.  
+Nesta classe serão implementados os métodos da interface para a persistência dos dados da aplicação. Os métodos são assíncronos possuindo o termo **async** e podemos também implementar o **virtual** para que os mesmos possam ser sobrescritos.  
+
+Agora deve-se criar as classes referentes a cada entidade que será persistida no banco de dados da sua aplicação, e cada uma delas deverá herdar de Repository<EntidadeAtual> (a entidade correspondente da classe) e também implementar a interface correspondente à mesma entidade. Os métodos são assíncronos possuindo o termo **async**.
+
+#### Configurando os repositórios na classe Startup por meio de injeção de dependência
+
+É preciso configurar o serviço para injeção de dependência dos seus repositórios na classe Startup, no método ConfigureServices, conforme o exemplo abaixo:
+
+```
+services.AddScoped<IProdutoRepository, ProdutoRepository>();
+services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
