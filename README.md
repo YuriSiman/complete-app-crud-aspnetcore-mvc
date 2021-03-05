@@ -18,9 +18,9 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 
 ### :pencil2: Progresso
 
-- [x] [Setup inicial da aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#setup-inicial-da-aplicação)  
-- [x] Instalar pacotes
-- [x] Adicionar referências dos projetos
+- [x] [Setup Inicial da Aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#setup-inicial-da-aplicação)  
+- [x] [Instalar Pacotes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#instalar-pacotes)  
+- [x] [Adicionar Referências aos Projetos](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#adicionar-referências-aos-projetos)  
 - [x] Definir as entidades da aplicação
 - [x] Configurar seu DbContext
 - [x] Configurar o mapeamento de suas entidades com FluentAPI
@@ -40,6 +40,31 @@ A aplicação consiste em três camadas:
 **Data** - configuração de uma Class Library .NET Core para a camada de dados da aplicação, nele está contido o DbContext para o contexto de dados, as referências ao Entity Framework, Mappings, Migrations e Repositórios.  
 
 <img src="./readme-images/setup.png" />
+
+---
+
+## Instalar Pacotes
+
+Pacotes a serem instalados pelo Package Manager Console ou Manage NuGet Packages:  
+
+Projeto - Camada App  
+```
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Instal-Package Microsoft.EntityFrameworkCore.Design
+```
+  
+Projeto - Camada Data  
+```
+Install-Package Microsoft.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.Relational
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Insall-Package Microsoft.EntityFrameworkCore.SqlServer
+```
+
+---
+
+## Adicionar Referências aos Projetos
+
 
 ---
 
