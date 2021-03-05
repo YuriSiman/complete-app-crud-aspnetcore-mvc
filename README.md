@@ -21,10 +21,10 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Setup Inicial da Aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#setup-inicial-da-aplicação)  
 - [x] [Instalar Pacotes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#instalar-pacotes)  
 - [x] [Adicionar Referências aos Projetos](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#adicionar-referências-aos-projetos)  
-- [x] Definir as entidades da aplicação
-- [x] Configurar seu DbContext
-- [x] Configurar o mapeamento de suas entidades com FluentAPI
-- [x] Gerar Migrations, Data Base e Scripts
+- [x] [Definir as entidades da aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#definir-as-entidades-da-aplicação)  
+- [x] [Configurar seu DbContext](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-seu-dbcontext)  
+- [x] [Configurar o mapeamento de suas entidades com FluentAPI](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-o-mapeamento-de-suas-entidades-com-fluentapi)  
+- [x] [Gerar Migrations, Data Base e Scripts](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-seu-dbcontext)  
 
 
 ---
@@ -40,6 +40,8 @@ A aplicação consiste em três camadas:
 **Data** - configuração de uma Class Library .NET Core para a camada de dados da aplicação, nele está contido o DbContext para o contexto de dados, as referências ao Entity Framework, Mappings, Migrations e Repositórios.  
 
 <img src="./readme-images/setup.png" />
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
 ---
 
@@ -61,10 +63,37 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
 Insall-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
 ---
 
-## Adicionar Referências aos Projetos
+## Adicionar Referências aos Projetos  
 
+Projeto - Camada App
+
+<img src="./readme-images/app-reference.png" />
+
+Projeto - Camada Data
+
+<img src="./readme-images/data-reference.png" />
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Definir as entidades da aplicação
+
+---
+
+## Configurar seu DbContext
+
+---
+
+## Configurar o mapeamento de suas entidades com FluentAPI
+
+---
+
+## Gerar Migrations, Data Base e Scripts
 
 ---
 
