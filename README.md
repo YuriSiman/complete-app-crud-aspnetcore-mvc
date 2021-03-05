@@ -93,8 +93,18 @@ Modelo Entidade-Relacionamento conforme a utilização do Entity Framework.
 
 ## Configurar seu DbContext
 
-O contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação.  
-Devemos sobrescrever o método OnModelCreating, para que nele possamos pegar nosso DbContext, buscar todas as entidades mapeadas no DbContext pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration para as entidades que estão configuradas no DbContext, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.
+#### Contexto de Dados
+
+O seu contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação.  
+Deve-se sobrescrever o método OnModelCreating, para que nele possamos pegar nosso contexto de dados, buscar todas as entidades mapeadas pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.  
+
+No método OnModelCreating também podemos **desabilitar** o **Cascade Delete**, ou seja, desabilitar a exclusão de objetos ligados diretamente a uma outra entidade. Ex: excluir um fornecedor e todos os seus produtos juntos.
+
+Também é possível mapear por default todas as propriedades do tipo string e relacionar com o tipo de coluna **varchar(100)** no banco de dados. Esta implementação pode ser interessante para que, se uma propriedade do tipo string não for mapeada manualmente, ela será por default.  
+
+#### Configurando seu DbContext na sua classe Startup
+
+
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
