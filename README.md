@@ -16,6 +16,17 @@ Clone este repositório em sua máquina local usando:
 git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 ```
 
+### :pencil2: Progresso
+
+- [x] [Setup inicial da aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#setup-inicial-da-aplicação)  
+- [x] Instalar pacotes
+- [x] Adicionar referências dos projetos
+- [x] Definir as entidades da aplicação
+- [x] Configurar seu DbContext
+- [x] Configurar o mapeamento de suas entidades com FluentAPI
+- [x] Gerar Migrations, Data Base e Scripts
+
+
 ---
 
 ## :rocket: Vamos Começar 
