@@ -26,6 +26,8 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Configurar o mapeamento de suas entidades com FluentAPI](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-o-mapeamento-de-suas-entidades-com-fluentapi)  
 - [x] [Gerar Migrations, Data Base e Scripts](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#gerar-migrations-data-base-e-scripts)  
 - [x] [Repository Pattern](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#repository-pattern)  
+- [x] [ViewModels](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#viewmodels)  
+- [x] [AutoMapper](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#automapper)  
 
 ---
 
@@ -202,6 +204,55 @@ Agora deve-se criar as classes referentes a cada entidade que será persistida n
 services.AddScoped<IProdutoRepository, ProdutoRepository>();
 services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## ViewModels
+
+Troca de informação entre os modelos de negócio (Business) com os modelos que serão exibidos na camada de apresentação (App), replicando os modelos de negócio para modelos intermediários chamados de **ViewModels** ou **DTO** (Data Transfer Object).  
+
+Não queremos "deformar" nossas entidades de negócio colocando campos que não serão mapeados no banco, mapeando propriedades que não são ligados à regra de negócio... queremos simplesmente criar modelos que sejam passíveis de serem exibidos na tela. Então, devemos criar uma **ViewModel** para cada **Model** existente em nossa camada de negócio. As **ViewModels** criadas precisam ter as **propriedades** necessárias e também o **Id** referente a cada entidade (uma vez que não iremos herdar de nenhuma Entity).  
+
+#### Data Annotations
+
+Devemos implementar os Data Annotations para mapear cada propriedade referente a cada **ViewModel**.  
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## AutoMapper
+
+Package Manager Console  
+
+Projeto - Camada App  
+
+```
+Install-Package Automapper.Extensions.Microsoft.DependencyInjection
+```
+
+Fazendo a transformação de **ViewModel** para **Model** e **Model** para **ViewModel** com **Automapper**.
+
+#### Configurando o Automapper na classe Startup
+
+É preciso configurar o serviço do AutoMapper na classe Startup, no método ConfigureServices, conforme o exemplo abaixo:  
+
+```
+services.AddAutoMapper(typeof(Startup));
+```
+
+Devemos criar uma classe AutoMapperConfig para configuração do Automapper, a classe deverá herdar de **Profile**. Nesta classe será definido o mapeamento das ViewModels e Models, segue exemplo abaixo:  
+
+```
+public AutoMapperConfig()
+        {
+            CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
+            CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
+            CreateMap<Produto, ProdutoViewModel>().ReverseMap();
+        }
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
