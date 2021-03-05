@@ -28,7 +28,7 @@ A aplicação consiste em três camadas:
 **Business** - configuração de uma Class Library .NET Core para as regras de negócio da aplicação, camada de domínio. Onde se encontra as Entidades de negócio, notificações, validações e serviços.  
 **Data** - configuração de uma Class Library .NET Core para a camada de dados da aplicação, nele está contido o DbContext para o contexto de dados, as referências ao Entity Framework, Mappings, Migrations e Repositórios.  
 
-<img src="./readme-image/setup.png" />
+<img src="./readme-images/setup.png" />
 
 ---
 
