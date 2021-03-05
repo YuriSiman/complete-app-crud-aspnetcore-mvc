@@ -52,7 +52,7 @@ Pacotes a serem instalados pelo Package Manager Console ou Manage NuGet Packages
 Projeto - Camada App  
 ```
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
-Instal-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Microsoft.EntityFrameworkCore.Design
 ```
   
 Projeto - Camada Data  
@@ -60,7 +60,7 @@ Projeto - Camada Data
 Install-Package Microsoft.EntityFrameworkCore
 Install-Package Microsoft.EntityFrameworkCore.Relational
 Install-Package Microsoft.EntityFrameworkCore.Tools
-Insall-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
@@ -100,11 +100,18 @@ Deve-se sobrescrever o método OnModelCreating, para que nele possamos pegar nos
 
 No método OnModelCreating também podemos **desabilitar** o **Cascade Delete**, ou seja, desabilitar a exclusão de objetos ligados diretamente a uma outra entidade. Ex: excluir um fornecedor e todos os seus produtos juntos.
 
-Também é possível mapear por default todas as propriedades do tipo string e relacionar com o tipo de coluna **varchar(100)** no banco de dados. Esta implementação pode ser interessante para que, se uma propriedade do tipo string não for mapeada manualmente, ela será por default.  
-
 #### Configurando seu DbContext na sua classe Startup
 
+É necessário configurar seu contexto de dados dentro da sua classe Startup. Segue exemplo de implementação abaixo:
 
+```
+services.AddDbContext<ApplicationDbContext>(options =>
+       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+```
+
+#### Configurando o arquivo appsettings.json
+
+Após a implementação do DbContext na Startup, é necessário passar as informações do banco de dados na **ConnectionStrings** dentro do arquivo appsettings.json. Essa **ConnectionString** possui a **DefaultConnection** que é chamada dentro do serviço que adiciona o seu contexto de dados na sua classe Startup.  
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
