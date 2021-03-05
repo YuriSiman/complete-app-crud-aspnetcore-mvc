@@ -53,6 +53,7 @@ Projeto - Camada App
 ```
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 Install-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Automapper.Extensions.Microsoft.DependencyInjection
 ```
   
 Projeto - Camada Data  
