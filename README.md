@@ -105,13 +105,19 @@ No método OnModelCreating também podemos **desabilitar** o **Cascade Delete**,
 É necessário configurar seu contexto de dados dentro da sua classe Startup. Segue exemplo de implementação abaixo:
 
 ```
-services.AddDbContext<ApplicationDbContext>(options =>
+services.AddDbContext<SeuDbContext>(options =>
        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 ```
 
 #### Configurando o arquivo appsettings.json
 
 Após a implementação do DbContext na Startup, é necessário passar as informações do banco de dados na **ConnectionStrings** dentro do arquivo appsettings.json. Essa **ConnectionString** possui a **DefaultConnection** que é chamada dentro do serviço que adiciona o seu contexto de dados na sua classe Startup.  
+
+```
+"ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=CompleteApp;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
@@ -126,6 +132,26 @@ Mapeando as entidades para o banco de dados com o FluentApi, é o ideal para nã
 ---
 
 ## Gerar Migrations, Data Base e Scripts
+
+Gerando pelo Package Manager Console
+
+Gerando Migrations
+
+```
+Add-Migration NomeMigration -Context SeuDbContext
+```
+
+Gerando Base de Dados
+
+```
+Update-Database -Context SeuDbContext
+```
+
+Gerando Scripts Idempotentes
+
+```
+Script-Migration -Idempotent
+```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
