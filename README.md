@@ -93,11 +93,16 @@ Modelo Entidade-Relacionamento conforme a utilização do Entity Framework.
 
 ## Configurar seu DbContext
 
+O contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação.  
+Devemos sobrescrever o método OnModelCreating, para que nele possamos pegar nosso DbContext, buscar todas as entidades mapeadas no DbContext pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration para as entidades que estão configuradas no DbContext, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.
+
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
 ---
 
 ## Configurar o mapeamento de suas entidades com FluentAPI
+
+Mapeando as entidades para o banco de dados com o FluentApi, é o ideal para não poluir suas entidades com os DataAnnotations. Para o mapeamento é feita a implementação da interface IEntityTypeConfiguration<Entity>, com a qual é criada uma classe para mapeamento específico de cada entidade, definindo campos como Primary Key, definindo o tipo da propriadade a ser inserida na base, o nome de cada tabela na base de dados e o relacionamento entre as entidades. 
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
