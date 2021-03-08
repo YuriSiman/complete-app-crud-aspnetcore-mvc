@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CompleteApp.App.ViewModels
 {
@@ -35,6 +32,8 @@ namespace CompleteApp.App.ViewModels
         [DisplayName("Ativo?")]
         public bool Ativo { get; set; }
 
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [DisplayName("Fornecedor")]
         public Guid FornecedorId { get; set; }
 
         public FornecedorViewModel Fornecedor { get; set; }
