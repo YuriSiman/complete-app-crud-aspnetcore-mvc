@@ -1,10 +1,6 @@
 ﻿using CompleteApp.Business.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompleteApp.Data.Context
 {
@@ -15,6 +11,7 @@ namespace CompleteApp.Data.Context
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

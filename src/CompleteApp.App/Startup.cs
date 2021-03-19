@@ -42,6 +42,7 @@ namespace CompleteApp.App
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

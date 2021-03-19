@@ -12,6 +12,8 @@ namespace CompleteApp.Business.Models
         public bool Ativo { get; set; }
         public Guid FornecedorId { get; set; }
         public Fornecedor Fornecedor { get; set; }
+        public Guid CategoriaId { get; set; }
+        public Categoria Categoria { get; set; }
 
     }
 }
