@@ -1,25 +1,26 @@
 ﻿@model CompleteApp.App.ViewModels.ProdutoViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Novo Produto";
 }
 
-<h1>Create</h1>
-
-<h4>ProdutoViewModel</h4>
+<h1>@ViewData["Title"]</h1>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="FornecedorId" class="control-label"></label>
-                <input asp-for="FornecedorId" class="form-control" />
+                <select asp-for="FornecedorId" class="form-control" asp-items="@(new SelectList(Model.Fornecedores, "Id", "Nome"))">
+                    <option></option>
+                </select>
                 <span asp-validation-for="FornecedorId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,14 +49,11 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

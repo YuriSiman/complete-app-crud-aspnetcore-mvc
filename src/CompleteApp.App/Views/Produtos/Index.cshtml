@@ -1,20 +1,21 @@
 ﻿@model IEnumerable<CompleteApp.App.ViewModels.ProdutoViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de Produtos";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
+<hr />
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-info" asp-action="Create">Novo Produto</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Id)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -31,7 +32,7 @@
                 @Html.DisplayNameFor(model => model.Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FornecedorId)
+                @Html.DisplayNameFor(model => model.Fornecedor)
             </th>
             <th></th>
         </tr>
@@ -39,9 +40,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Id)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
@@ -58,12 +59,12 @@
                 @Html.DisplayFor(modelItem => item.Ativo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FornecedorId)
+                @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="btn btn-info" asp-controller="Produtos" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
+                <a class="btn btn-warning" asp-controller="Produtos" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                <a class="btn btn-danger" asp-controller="Produtos" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
             </td>
         </tr>
 }

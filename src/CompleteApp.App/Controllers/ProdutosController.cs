@@ -53,7 +53,7 @@ namespace CompleteApp.App.Controllers
 
             await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
-            return View(produtoViewModel);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(Guid id)
