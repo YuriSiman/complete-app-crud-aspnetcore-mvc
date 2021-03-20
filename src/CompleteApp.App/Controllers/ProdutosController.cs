@@ -13,18 +13,20 @@ namespace CompleteApp.App.Controllers
     {
         protected readonly IProdutoRepository _produtoRepository;
         protected readonly IFornecedorRepository _fornecedorRepository;
+        protected readonly ICategoriaRepository _categoriaRepository;
         protected readonly IMapper _mapper;
 
-        public ProdutosController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, IMapper mapper)
+        public ProdutosController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, ICategoriaRepository categoriaRepository, IMapper mapper)
         {
             _produtoRepository = produtoRepository;
             _fornecedorRepository = fornecedorRepository;
+            _categoriaRepository = categoriaRepository;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
+            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedoresCategorias()));
         }
 
         public async Task<IActionResult> Details(Guid id)
@@ -38,7 +40,7 @@ namespace CompleteApp.App.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
+            var produtoViewModel = await PopularFornecedoresCategorias(new ProdutoViewModel());
 
             return View(produtoViewModel);
         }
@@ -47,7 +49,7 @@ namespace CompleteApp.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProdutoViewModel produtoViewModel)
         {
-            produtoViewModel = await PopularFornecedores(produtoViewModel);
+            produtoViewModel = await PopularFornecedoresCategorias(produtoViewModel);
 
             if (!ModelState.IsValid) return View(produtoViewModel);
 
@@ -102,14 +104,16 @@ namespace CompleteApp.App.Controllers
 
         private async Task<ProdutoViewModel> ObterProduto(Guid id)
         {
-            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
+            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedorCategoria(id));
             produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
             return produto;
         }
 
-        private async Task<ProdutoViewModel> PopularFornecedores(ProdutoViewModel produto)
+        private async Task<ProdutoViewModel> PopularFornecedoresCategorias(ProdutoViewModel produto)
         {
             produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
             return produto;
         }
     }

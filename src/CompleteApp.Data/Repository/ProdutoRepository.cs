@@ -13,15 +13,15 @@ namespace CompleteApp.Data.Repository
     {
         public ProdutoRepository(MvcDbContext context) : base(context) { }
 
-        public async Task<Produto> ObterProdutoFornecedor(Guid id)
+        public async Task<Produto> ObterProdutoFornecedorCategoria(Guid id)
         {
-            return await Db.Produtos.AsNoTracking().Include(p => p.Fornecedor)
+            return await Db.Produtos.AsNoTracking().Include(p => p.Fornecedor).Include(p => p.Categoria)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<IEnumerable<Produto>> ObterProdutosFornecedores()
+        public async Task<IEnumerable<Produto>> ObterProdutosFornecedoresCategorias()
         {
-            return await Db.Produtos.AsNoTracking().Include(p => p.Fornecedor)
+            return await Db.Produtos.AsNoTracking().Include(p => p.Fornecedor).Include(p => p.Categoria)
                 .OrderBy(p => p.Nome).ToListAsync();
         }
 
