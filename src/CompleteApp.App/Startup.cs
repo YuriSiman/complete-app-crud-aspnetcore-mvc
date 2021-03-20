@@ -1,4 +1,5 @@
 using CompleteApp.App.Data;
+using CompleteApp.App.Extensions;
 using CompleteApp.Business.Interfaces;
 using CompleteApp.Data.Context;
 using CompleteApp.Data.Repository;
@@ -39,6 +40,7 @@ namespace CompleteApp.App
             services.AddControllersWithViews();
 
             services.AddScoped<MvcDbContext>();
+            services.AddScoped<UploadFiles>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();

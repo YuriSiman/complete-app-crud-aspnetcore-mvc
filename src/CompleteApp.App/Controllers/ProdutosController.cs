@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CompleteApp.App.Extensions;
 using CompleteApp.App.ViewModels;
 using CompleteApp.Business.Interfaces;
 using CompleteApp.Business.Models;
@@ -17,13 +18,15 @@ namespace CompleteApp.App.Controllers
         protected readonly IFornecedorRepository _fornecedorRepository;
         protected readonly ICategoriaRepository _categoriaRepository;
         protected readonly IMapper _mapper;
+        protected readonly UploadFiles _uploadFiles;
 
-        public ProdutosController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, ICategoriaRepository categoriaRepository, IMapper mapper)
+        public ProdutosController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, ICategoriaRepository categoriaRepository, IMapper mapper, UploadFiles uploadFiles)
         {
             _produtoRepository = produtoRepository;
             _fornecedorRepository = fornecedorRepository;
             _categoriaRepository = categoriaRepository;
             _mapper = mapper;
+            _uploadFiles = uploadFiles;
         }
 
         public async Task<IActionResult> Index()
@@ -55,14 +58,8 @@ namespace CompleteApp.App.Controllers
 
             if (!ModelState.IsValid) return View(produtoViewModel);
 
-            // Upload Imagem
-            var imgPrefixo = Guid.NewGuid() + "_";
-            if(! await UploadArquivo(produtoViewModel.ImagemUpload, imgPrefixo))
-            {
-                return View(produtoViewModel);
-            }
-            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
-
+            // Upload da Imagem
+            if (!await UploadImagemProduto(produtoViewModel)) return View(produtoViewModel);
 
             await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
@@ -115,36 +112,28 @@ namespace CompleteApp.App.Controllers
 
         private async Task<ProdutoViewModel> ObterProduto(Guid id)
         {
-            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedorCategoria(id));
-            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
-            produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
-            return produto;
+            var produtoViewModel = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedorCategoria(id));
+            produtoViewModel.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            produtoViewModel.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
+            return produtoViewModel;
         }
 
-        private async Task<ProdutoViewModel> PopularFornecedoresCategorias(ProdutoViewModel produto)
+        private async Task<ProdutoViewModel> PopularFornecedoresCategorias(ProdutoViewModel produtoViewModel)
         {
-            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
-            produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
-            return produto;
+            produtoViewModel.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            produtoViewModel.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
+            return produtoViewModel;
         }
 
-        private async Task<bool> UploadArquivo(IFormFile arquivo, string imgPrefixo)
+        private async Task<bool> UploadImagemProduto(ProdutoViewModel produtoViewModel)
         {
-            if (arquivo.Length <= 0) return false;
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", imgPrefixo + arquivo.FileName);
-
-            if (System.IO.File.Exists(path))
+            var imgPrefixo = Guid.NewGuid() + "_";
+            if (!await _uploadFiles.UploadImage(produtoViewModel.ImagemUpload, imgPrefixo))
             {
-                ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
+                ModelState.AddModelError(string.Empty, "Arquivo inválido!");
                 return false;
             }
-
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await arquivo.CopyToAsync(stream);
-            }
-
+            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
             return true;
         }
     }
