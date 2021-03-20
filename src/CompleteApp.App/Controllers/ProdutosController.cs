@@ -2,9 +2,11 @@
 using CompleteApp.App.ViewModels;
 using CompleteApp.Business.Interfaces;
 using CompleteApp.Business.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace CompleteApp.App.Controllers
@@ -52,6 +54,15 @@ namespace CompleteApp.App.Controllers
             produtoViewModel = await PopularFornecedoresCategorias(produtoViewModel);
 
             if (!ModelState.IsValid) return View(produtoViewModel);
+
+            // Upload Imagem
+            var imgPrefixo = Guid.NewGuid() + "_";
+            if(! await UploadArquivo(produtoViewModel.ImagemUpload, imgPrefixo))
+            {
+                return View(produtoViewModel);
+            }
+            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+
 
             await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
@@ -115,6 +126,26 @@ namespace CompleteApp.App.Controllers
             produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
             return produto;
+        }
+
+        private async Task<bool> UploadArquivo(IFormFile arquivo, string imgPrefixo)
+        {
+            if (arquivo.Length <= 0) return false;
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", imgPrefixo + arquivo.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
+                return false;
+            }
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await arquivo.CopyToAsync(stream);
+            }
+
+            return true;
         }
     }
 }

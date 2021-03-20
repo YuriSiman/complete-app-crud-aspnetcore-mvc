@@ -28,4 +28,8 @@
     <ProjectReference Include="..\CompleteApp.Data\CompleteApp.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
