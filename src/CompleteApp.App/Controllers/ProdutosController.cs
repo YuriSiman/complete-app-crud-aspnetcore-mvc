@@ -3,11 +3,9 @@ using CompleteApp.App.Extensions;
 using CompleteApp.App.ViewModels;
 using CompleteApp.Business.Interfaces;
 using CompleteApp.Business.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace CompleteApp.App.Controllers
