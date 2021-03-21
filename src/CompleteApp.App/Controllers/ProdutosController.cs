@@ -81,9 +81,12 @@ namespace CompleteApp.App.Controllers
         {
             if (id != produtoViewModel.Id) return NotFound();
 
-            if (!ModelState.IsValid) return View(produtoViewModel);
+            var produtoAtualizado = await ObterProduto(id);
 
-            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoViewModel));
+            //Update da Imagem
+            if (!await UpdateImagemProduto(produtoViewModel, produtoAtualizado)) return View(produtoAtualizado);
+
+            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoAtualizado));
 
             return RedirectToAction(nameof(Index));
         }
@@ -134,6 +137,35 @@ namespace CompleteApp.App.Controllers
                 return false;
             }
             produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+            return true;
+        }
+
+        private async Task<bool> UpdateImagemProduto(ProdutoViewModel produtoViewModel, ProdutoViewModel produtoAtualizado)
+        {
+            //produtoViewModel.Fornecedor = produtoAtualizado.Fornecedor;
+            //produtoViewModel.Categoria = produtoAtualizado.Categoria;
+            produtoViewModel.Imagem = produtoAtualizado.Imagem;
+
+            if (!ModelState.IsValid) return false;
+
+            if (produtoViewModel.ImagemUpload != null)
+            {
+                var imgPrefixo = Guid.NewGuid() + "_";
+                if (!await _uploadFiles.UploadImage(produtoViewModel.ImagemUpload, imgPrefixo))
+                {
+                    ModelState.AddModelError(string.Empty, "Arquivo inválido!");
+                    return false;
+                }
+                produtoAtualizado.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+            }
+
+            produtoAtualizado.Nome = produtoViewModel.Nome;
+            produtoAtualizado.Descricao = produtoViewModel.Descricao;
+            produtoAtualizado.Valor = produtoViewModel.Valor;
+            produtoAtualizado.Ativo = produtoViewModel.Ativo;
+            produtoAtualizado.Categoria = produtoViewModel.Categoria;
+            produtoAtualizado.Fornecedor = produtoViewModel.Fornecedor;
+
             return true;
         }
     }
