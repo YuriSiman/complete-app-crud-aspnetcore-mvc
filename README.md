@@ -29,6 +29,8 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [ViewModels](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#viewmodels)  
 - [x] [AutoMapper](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#automapper)  
 - [x] [Controllers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#controllers)  
+- [x] [Views](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#views)  
+- [x] [Upload de Arquivos - Imagens](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#upload-de-arquivos---imagens)  
 
 ---
 
@@ -272,7 +274,7 @@ Ao criar cada Controller nós devemos chamar o repositório referente a cada uma
 
 ## Views
 
-Para cada Controller criada, também criaremos as View. Podemos criar o modelo inicial das Views por meio do Visual Studio 2019, gerando automaticamente as telas baseadas em nossas ViewModels, são elas:
+Para cada Controller criada, também criaremos as View. Podemos criar o modelo inicial das Views por meio do Visual Studio 2019, gerando automaticamente por Scaffolded as telas baseadas em nossas ViewModels, são elas:
 
 ```
 Create
@@ -282,9 +284,54 @@ Edit
 Index
 ```
 
+Segue passo a passo para criar cada uma das Views:
+
+<img src="./readme-images/gerando-view1.png" />
+<img src="./readme-images/gerando-view2.png" />
+<img src="./readme-images/gerando-view.3.png" />
+
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
 ---
+
+## Upload de Arquivos - Imagens
+
+Para configurar o Upload de arquivos, será criado uma classe chamada UploadFiles, dentro de uma pasta Extensions. Essa classe terá um método para o Upload de Imagens, chamando o caminho com o qual ficarão as imagens ```wwwroot/img```.
+
+Segue método a ser implementado para o Upload de imagens.
+
+```
+public async Task<bool> UploadImage(IFormFile arquivo, string imgPrefixo)
+        {
+            if (arquivo.Length <= 0) return false;
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", imgPrefixo + arquivo.FileName);
+
+            if (File.Exists(path)) return false;
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await arquivo.CopyToAsync(stream);
+            }
+
+            return true;
+        }
+```
+
+Esta classe será chamada na Controller que precisará realizar o Upload de Imagem, então, injetaremos ela por meio de injeção de dependência.
+
+Lembrando que devemos adicionar o serviço em nossa Startup para fazer a injeção de dependência:
+
+```
+services.AddScoped<UploadFiles>();
+```
+
+Na Controller deverão ser criados os métodos necessários para a manipulação de Upload e Update das imagens.
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
 
 ## :vertical_traffic_light: Status do Projeto
 
