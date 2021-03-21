@@ -31,7 +31,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Controllers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#controllers)  
 - [x] [Views](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#views)  
 - [x] [Upload de Arquivos - Imagens](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#upload-de-arquivos---imagens)  
-- [x] [Globalizando a Aplicação em pt-BR](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#globalizando-a-aplicação-em-pt---br)  
+- [x] [Globalizando a Aplicação em pt-BR](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#globalizando-a-aplicação-em-pt-br)  
 - [x] [Validações de Campos em Português](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validações-de-campos-em-português)  
 - [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
 
