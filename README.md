@@ -31,6 +31,9 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Controllers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#controllers)  
 - [x] [Views](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#views)  
 - [x] [Upload de Arquivos - Imagens](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#upload-de-arquivos---imagens)  
+- [x] [Globalizando a Aplicação em pt-BR](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#globalizando-a-aplicação-em-pt---br)  
+- [x] [Validações de Campos em Português](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validações-de-campos-em-português)  
+- [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
 
 ---
 
@@ -332,6 +335,177 @@ Na Controller deverão ser criados os métodos necessários para a manipulação
 
 ---
 
+## Globalizando a Aplicação em pt-BR
+
+Para que nossa aplicação se comporte em pt-BR devemos implementar configurações de Globalização. Seguem abaixo as configurações implementadas:
+
+
+* _Layout.cshtml
+
+```
+@System.Globalization.CultureInfo.CurrentUICulture
+```
+
+* Startup.cs - Método Configure
+
+```
+var defaultCulture = new CultureInfo("pt-BR");
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(defaultCulture),
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
+            };
+            app.UseRequestLocalization(localizationOptions);
+```
+
+* _ValidationScriptsPartial.cshtml - Script para globalizar moedas e datas
+
+```
+<script>
+    $.validator.methods.range = function (value, element, param) {
+        var globalizedValue = value.replace(",", ".");
+        return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+    };
+    $.validator.methods.number = function (value, element) {
+        return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+    };
+    $.validator.methods.date = function (value, element) {
+        var date = value.split("/");
+        return this.optional(element) || !/Invalid|NaN/.test(new Date(date[2], date[1], date[0]).toString());
+    };
+</script>
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Validações de Campos em Português
+
+Traduzindo todas as possíveis mensagens de erro das validações do ```ModelBindingMessageProvider``` para Português, implementação realizada dentro da **Startup**.
+
+```
+services.AddControllersWithViews(o =>
+            {
+                o.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((x, y) => "O valor preenchido é inválido para este campo.");
+                o.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(x => "Este campo precisa ser preenchido.");
+                o.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(() => "Este campo precisa ser preenchido.");
+                o.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(() => "É necessário que o body na requisição não esteja vazio.");
+                o.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(x => "O valor preenchido é inválido para este campo.");
+                o.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(() => "O valor preenchido é inválido para este campo.");
+                o.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(() => "O campo deve ser numérico");
+                o.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor(x => "O valor preenchido é inválido para este campo.");
+                o.ModelBindingMessageProvider.SetValueIsInvalidAccessor(x => "O valor preenchido é inválido para este campo.");
+                o.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(x => "O campo deve ser numérico.");
+                o.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(x => "Este campo precisa ser preenchido.");
+
+                o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Attributes
+
+Criando na pasta Extensions os Attributes para a customização de DataAnnotations. Implementar classes para tratamento tanto no client quanto no server.  
+
+* Moedas - MoedaAttribute
+
+```
+// MoedaAttribute.cs
+
+public class MoedaAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            try
+            {
+                var moeda = Convert.ToDecimal(value, new CultureInfo("pt-BR"));
+            }
+            catch (Exception)
+            {
+                return new ValidationResult("Moeda em formato inválido");
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+    
+
+// MoedaAttributeAdapter.cs
+
+public class MoedaAttributeAdapter : AttributeAdapterBase<MoedaAttribute>
+    {
+        public MoedaAttributeAdapter(MoedaAttribute attribute, IStringLocalizer stringLocalizer) : base(attribute, stringLocalizer) { }
+
+        public override void AddValidation(ClientModelValidationContext context)
+        {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
+            MergeAttribute(context.Attributes, "data-val", "true");
+            MergeAttribute(context.Attributes, "data-val-moeda", GetErrorMessage(context));
+            MergeAttribute(context.Attributes, "data-val-number", GetErrorMessage(context));
+        }
+        public override string GetErrorMessage(ModelValidationContextBase validationContext)
+        {
+            return "Moeda em formato inválido";
+        }
+    }
+    
+
+// MoedaValidationAttributeAdapterProvider.cs    
+    
+public class MoedaValidationAttributeAdapterProvider : IValidationAttributeAdapterProvider
+  {
+      private readonly IValidationAttributeAdapterProvider _baseProvider = new ValidationAttributeAdapterProvider();
+
+      public IAttributeAdapter GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer stringLocalizer)
+      {
+          if (attribute is MoedaAttribute moedaAttribute) return new MoedaAttributeAdapter(moedaAttribute, stringLocalizer);
+
+          return _baseProvider.GetAttributeAdapter(attribute, stringLocalizer);
+      }
+  }
+```
+
+Implementando a tag **[Moeda]** dentro da ViewModel, no campo Valor:
+
+```
+[Moeda]
+[Required(ErrorMessage = "O campo {0} é obrigatório")]
+public decimal Valor { get; set; }
+```
+
+Injetar o **MoeadaAdapter** via injeção de dependência na Startup:
+
+```
+services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
+```
+
+Por fim, podemos formatar o campo **Valor** em todoas as Views para que o valor seja exibido formatado conforme a sua moeda:
+
+* Details.cshtml
+
+```
+<dd class="col-sm-10">
+  @Model.Valor.ToString("C")
+</dd>
+```
+
+* Index.cshtml
+
+```
+<td>
+  @item.Valor.ToString("C")
+</td>
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
 
 ## :vertical_traffic_light: Status do Projeto
 
