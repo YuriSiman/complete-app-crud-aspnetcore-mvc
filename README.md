@@ -205,6 +205,7 @@ Agora deve-se criar as classes referentes a cada entidade que será persistida n
 services.AddScoped<IProdutoRepository, ProdutoRepository>();
 services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
@@ -253,6 +254,7 @@ public AutoMapperConfig()
             CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
             CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
             CreateMap<Produto, ProdutoViewModel>().ReverseMap();
+            CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
         }
 ```
 
