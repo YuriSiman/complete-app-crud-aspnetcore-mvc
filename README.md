@@ -34,7 +34,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Globalizando a Aplicação em pt-BR](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#globalizando-a-aplicação-em-pt-br)  
 - [x] [Validações de Campos em Português](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validações-de-campos-em-português)  
 - [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
-- [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpf/cnpj)  
+- [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpfcnpj)  
 
 ---
 
