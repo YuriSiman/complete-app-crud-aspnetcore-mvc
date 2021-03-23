@@ -1,7 +1,7 @@
 ﻿@model CompleteApp.App.ViewModels.FornecedorViewModel
 
 @{
-    ViewData["Title"] = "Editar " + Model.Nome;
+    ViewData["Title"] = "Editar Fornecedor";
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -14,13 +14,13 @@
     <input type="hidden" asp-for="Id" />
 
     <div class="form-row">
-        <div class="form-group col-md-10">
+        <div class="form-group col-md-6">
 
-            <label asp-for="Nome" class="control-label"></label>
+            <label asp-for="Nome"></label>
             <input asp-for="Nome" class="form-control" />
             <span asp-validation-for="Nome" class="text-danger"></span>
 
-            <label asp-for="Documento" class="control-label"></label>
+            <label asp-for="Documento"></label>
             <input asp-for="Documento" class="form-control" />
             <span asp-validation-for="Documento" class="text-danger"></span>
 
@@ -48,9 +48,17 @@
     </div>
 </form>
 
-@*<div>
+<hr />
+<h4>Endereço</h4>
+<div>
     <partial name="_IndexEndereco" />
-</div>*@
+</div>
+
+<hr />
+<h4>Produtos</h4>
+<div>
+    <partial name="../Produtos/_ListaProdutos" model="@Model.Produtos" />
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

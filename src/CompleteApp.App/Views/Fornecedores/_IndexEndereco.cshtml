@@ -1,9 +1,4 @@
-﻿@model IEnumerable<CompleteApp.App.ViewModels.FornecedorViewModel>
-
-<div>
-    <h4>Endereço</h4>
-    <hr />
-</div>
+﻿@model CompleteApp.App.ViewModels.FornecedorViewModel
 
 @if (Model != null)
 {
@@ -34,37 +29,33 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Logradouro)
+                        @Html.DisplayFor(model => model.Endereco.Logradouro)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Numero)
+                        @Html.DisplayFor(model => model.Endereco.Numero)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Complemento)
+                        @Html.DisplayFor(model => model.Endereco.Complemento)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Cep)
+                        @Html.DisplayFor(model => model.Endereco.Cep)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Bairro)
+                        @Html.DisplayFor(model => model.Endereco.Bairro)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Cidade)
+                        @Html.DisplayFor(model => model.Endereco.Cidade)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Estado)
+                        @Html.DisplayFor(model => model.Endereco.Estado)
                     </td>
                     <td>
                         <a class="btn btn-warning"><spam title="Editar" class="fa fa-pencil-alt"></spam></a>
                     </td>
                 </tr>
-            }
-        </tbody>
     </table>
 }
 
