@@ -4,7 +4,7 @@
     ViewData["Title"] = "Novo Fornecedor";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h4>@ViewData["Title"]</h4>
 <hr />
 
 <div class="row">
@@ -32,14 +32,14 @@
                 </label>
             </div>
 
-            <h1>Endereço</h1>
+            <h4>Endereço</h4>
             <hr />
 
-            <partial name="_Endereco" />
+            <partial name="_CreateEndereco" />
 
             <div class="form-group">
                 <input type="submit" value="Adicionar" class="btn btn-primary" />
-                <a class="btn btn-info" asp-action="Index">Voltar</a>
+                <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
             </div>
         </form>
     </div>
