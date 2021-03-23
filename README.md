@@ -34,6 +34,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Globalizando a Aplicação em pt-BR](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#globalizando-a-aplicação-em-pt-br)  
 - [x] [Validações de Campos em Português](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validações-de-campos-em-português)  
 - [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
+- [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpf/cnpj)  
 
 ---
 
@@ -501,6 +502,41 @@ Por fim, podemos formatar o campo **Valor** em todoas as Views para que o valor 
 <td>
   @item.Valor.ToString("C")
 </td>
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## RazorExtensions - Formatação de CPF/CNPJ
+
+Formatando o CPF e o CNPJ utilizando o Razor criando a classe RazorExtensions dentro da pasta Extensions:
+
+```
+public static class RazorExtensions
+    {
+        public static string FormataDocumento(this RazorPage page, int tipoFornecedor, string documento)
+        {
+            return tipoFornecedor == 1 ? Convert.ToInt64(documento).ToString(@"000\.000\.000\-00") : Convert.ToInt64(documento).ToString(@"00\.000\.000\/0000\-00");
+        }
+    }
+```
+
+Implementar nas Views necessárias:
+
+```
+<td>
+  @this.FormataDocumento(item.TipoFornecedor, item.Documento)
+</td>
+```
+
+Importar a pasta Extensions na _ViewImports.cshtml
+
+```
+@using CompleteApp.App
+@using CompleteApp.App.ViewModels
+@using CompleteApp.App.Extensions
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
