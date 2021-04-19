@@ -53,7 +53,9 @@
                         @Html.DisplayFor(model => model.Endereco.Estado)
                     </td>
                     <td>
-                        <a class="btn btn-warning"><spam title="Editar" class="fa fa-pencil-alt"></spam></a>
+                        <a asp-action="EditEndereco" asp-route-id="@Model.Id" class="btn btn-warning" data-modal="">
+                        <spam title="Editar" class="fa fa-pencil-alt"></spam>
+                        </a>
                     </td>
                 </tr>
     </table>
