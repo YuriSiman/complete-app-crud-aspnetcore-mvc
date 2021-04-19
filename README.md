@@ -35,6 +35,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Validações de Campos em Português](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validações-de-campos-em-português)  
 - [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
 - [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpfcnpj)  
+- [x] [Modal Window](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#modal-window)  
 
 ---
 
@@ -537,6 +538,94 @@ Importar a pasta Extensions na _ViewImports.cshtml
 @using CompleteApp.App.ViewModels
 @using CompleteApp.App.Extensions
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Modal Window
+
+Nesta etapa será criado uma Modal Window para exibição e edição dos campos de endereço. Devemos adicionar uma Partial View _EditEndereco dentro de Fornecedores, ela será nossa Modal Window.
+
+Para implementar a Modal Window:
+
+```
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["Title"]</h4>
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span><span class="sr-only">Fechar</span>
+    </button>
+</div>
+
+<form asp-action="EditEndereco">
+    <div class="modal-body">
+
+        <input type="hidden" asp-for="Endereco.FornecedorId" />
+        <input type="hidden" asp-for="Endereco.Id" />
+
+        <partial name="_CreateEndereco" />
+
+        <div class="modal-footer">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Atualizar Endereço" class="btn btn-success" />
+                <input type="button" class="btn btn-info" value="Fechar" data-dismiss="modal" />
+            </div>
+        </div>
+
+    </div>
+</form>
+```
+
+Deve-se criar o método EditEndereco dentro da **FornecedoresController** para retornar a Modal Window. E também o método de **POST** dentro da **FornecedoresController** para submeter a alteração do endereço.
+
+Inserir código Java Script dentro do arquivo **site.js** para que possamos carregar a Modal Window via **Ajax**, inserindo a **myModalContent** dentro da View Edit de Fornecedor para poder exibir o conteúdo da Modal Window.
+
+site.js
+
+```
+function AjaxModal() {
+
+	$(document).ready(function () {
+		$(function () {
+			$.ajaxSetup({ cache: false });
+
+			$("a[data-modal]").on("click",
+				function (e) {
+					$('#myModalContent').load(this.href,
+						function () {
+							$('#myModal').modal({
+								keyboard: true
+							},
+								'show');
+							bindForm(this);
+						});
+					return false;
+				});
+		});
+
+		function bindForm(dialog) {
+			$('form', dialog).submit(function () {
+				$.ajax({
+					url: this.action,
+					type: this.method,
+					data: $(this).serialize(),
+					success: function (result) {
+						if (result.success) {
+							$('#myModal').modal('hide');
+							$('#EnderecoTarget').load(result.url); // Carrega o resultado HTML para a div demarcada
+							window.location.reload(false); // Recarregando a página
+						} else {
+							$('#myModalContent').html(result);
+							bindForm(dialog);
+						}
+					}
+				});
+				return false;
+			});
+		}
+	});
+}
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
