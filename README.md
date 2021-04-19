@@ -22,6 +22,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Instalar Pacotes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#instalar-pacotes)  
 - [x] [Adicionar Referências aos Projetos](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#adicionar-referências-aos-projetos)  
 - [x] [Definir as entidades da aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#definir-as-entidades-da-aplicação)  
+- [x] [Configurations](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurations)  
 - [x] [Configurar seu DbContext](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-seu-dbcontext)  
 - [x] [Configurar o mapeamento de suas entidades com FluentAPI](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-o-mapeamento-de-suas-entidades-com-fluentapi)  
 - [x] [Gerar Migrations, Data Base e Scripts](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#gerar-migrations-data-base-e-scripts)  
@@ -103,28 +104,107 @@ Modelo Entidade-Relacionamento conforme a utilização do Entity Framework.
 
 ---
 
+## Configurations
+
+Implementando pasta Configurations onde serão criadas as classes de configuração da Startup, tendo como objetivo desacoplar a classe Startup, deixando-a mais limpa e reduzida. As classes de Configuração precisarão implementar métodos de extensão do IServiceCollection, IConfiguration, IApplicationBuilder e IHostEnvironment. As configurações irão variar conforme a sua necessidade. Segue abaixo exemplo de configuração do DbContext.
+
+DbContextConfig:
+
+```
+namespace CompleteApp.App.Configurations
+{
+    public static class DbContextConfig
+    {
+        public static IServiceCollection AddDbContextConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<MvcDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            return services;
+        }
+    }
+}
+```
+
+Startup:
+
+```
+public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContextConfiguration(Configuration);
+        }
+```
+
+Exemplos de Configurations a serem implementadas:
+
+- DbContextConfig
+- DependencyInjectionConfig
+- GlobalizationConfig
+- IdentityConfig
+- MvcConfig
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
 ## Configurar seu DbContext
 
 #### Contexto de Dados
 
-O seu contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação.  
-Deve-se sobrescrever o método OnModelCreating, para que nele possamos pegar nosso contexto de dados, buscar todas as entidades mapeadas pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.  
+O seu contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação. Deve-se sobrescrever o método OnModelCreating, para que nele possamos pegar nosso contexto de dados, buscar todas as entidades mapeadas pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.  
 
 No método OnModelCreating também podemos **desabilitar** o **Cascade Delete**, ou seja, desabilitar a exclusão de objetos ligados diretamente a uma outra entidade. Ex: excluir um fornecedor e todos os seus produtos juntos.
 
-#### Configurando seu DbContext na sua classe Startup
+#### Configurando seu DbContext na configuração da classe Startup - DbContextConfig
 
-É necessário configurar o serviço do seu contexto de dados dentro da sua classe Startup, no método ConfigureServices. Segue exemplo de implementação abaixo:
+É necessário configurar o serviço do seu contexto de dados dentro da sua classe Startup, no método ConfigureServices. Para isso, iremos implementar dentro da classe de configuração DbContextConfig. Segue exemplo de implementação abaixo.
 
-```
-services.AddDbContext<SeuDbContext>(options =>
-       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-```
-
-Também é preciso configurar o serviço para injeção de dependência do seu DbContext na classe Startup, no método ConfigureServices, conforme implementação abaixo:
+DbContextConfig:
 
 ```
-services.AddScoped<SeuDbContext>();
+namespace CompleteApp.App.Configurations
+{
+    public static class DbContextConfig
+    {
+        public static IServiceCollection AddDbContextConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<MvcDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            return services;
+        }
+    }
+}
+```
+
+Startup:
+
+```
+	services.AddDbContextConfiguration(Configuration);
+
+```
+
+Também é preciso configurar o serviço para injeção de dependência do seu DbContext na classe Startup, no método ConfigureServices, para isso, criaremos uma nova classe de configuração chamada DependencyInjectionConfig. E lá, faremos a injeção de dependência.
+
+```
+namespace CompleteApp.App.Configurations
+{
+    public static class DependencyInjectionConfig
+    {
+        public static IServiceCollection ResolveDependencies(this IServiceCollection services)
+        {
+            services.AddScoped<MvcDbContext>();
+
+            return services;
+        }
+    }
+}
+```
+
+Depois, chamaremos o serviço dentro da Startup:
+
+``` 
+	services.ResolveDependencies();
 ```
 
 #### Configurando o arquivo appsettings.json
@@ -207,7 +287,7 @@ Agora deve-se criar as classes referentes a cada entidade que será persistida n
 
 #### Configurando os repositórios na classe Startup por meio de injeção de dependência
 
-É preciso configurar o serviço para injeção de dependência dos seus repositórios na classe Startup, no método ConfigureServices, conforme o exemplo abaixo:
+É preciso configurar o serviço para injeção de dependência dos seus repositórios na classe Startup, no método ConfigureServices, para isso, utilizaremos nossa classe de configuração de injeção de dependência DependencyInjectionConfig e colocaremos conforme o exemplo abaixo:
 
 ```
 services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -326,7 +406,7 @@ public async Task<bool> UploadImage(IFormFile arquivo, string imgPrefixo)
 
 Esta classe será chamada na Controller que precisará realizar o Upload de Imagem, então, injetaremos ela por meio de injeção de dependência.
 
-Lembrando que devemos adicionar o serviço em nossa Startup para fazer a injeção de dependência:
+Lembrando que devemos adicionar o serviço em nossa Startup para a injeção de dependência, com isso, iremos utilizar nossa classe de configuração DependencyInjectionConfig e adicionaremos nela o exemplo abaixo:
 
 ```
 services.AddScoped<UploadFiles>();
@@ -349,10 +429,16 @@ Para que nossa aplicação se comporte em pt-BR devemos implementar configuraç�
 @System.Globalization.CultureInfo.CurrentUICulture
 ```
 
-* Startup.cs - Método Configure
+* GlobalizationConfig.cs - Método de configuração da Startup
 
 ```
-var defaultCulture = new CultureInfo("pt-BR");
+namespace CompleteApp.App.Configurations
+{
+    public static class GlobalizationConfig
+    {
+        public static IApplicationBuilder UseGlobalizationConfiguration(this IApplicationBuilder app)
+        {
+            var defaultCulture = new CultureInfo("pt-BR");
             var localizationOptions = new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture(defaultCulture),
@@ -360,6 +446,18 @@ var defaultCulture = new CultureInfo("pt-BR");
                 SupportedUICultures = new List<CultureInfo> { defaultCulture }
             };
             app.UseRequestLocalization(localizationOptions);
+
+            return app;
+        }
+    }
+}
+```
+
+
+* Startup.cs - Método Configure (Esta implementação ficará na classe MvcConfig)
+
+```
+app.UseGlobalizationConfiguration();
 ```
 
 * _ValidationScriptsPartial.cshtml - Script para globalizar moedas e datas
@@ -386,10 +484,16 @@ var defaultCulture = new CultureInfo("pt-BR");
 
 ## Validações de Campos em Português
 
-Traduzindo todas as possíveis mensagens de erro das validações do ```ModelBindingMessageProvider``` para Português, implementação realizada dentro da **Startup**.
+Traduzindo todas as possíveis mensagens de erro das validações do ```ModelBindingMessageProvider``` para Português, implementação realizada dentro da **MvcConfig** (Classe de configuração da Startup).
 
 ```
-services.AddControllersWithViews(o =>
+namespace CompleteApp.App.Configurations
+{
+    public static class MvcConfig
+    {
+        public static IServiceCollection AddMvcConfiguration(this IServiceCollection services)
+        {
+            services.AddControllersWithViews(o =>
             {
                 o.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((x, y) => "O valor preenchido é inválido para este campo.");
                 o.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(x => "Este campo precisa ser preenchido.");
@@ -405,6 +509,50 @@ services.AddControllersWithViews(o =>
 
                 o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
+
+            return services;
+        }
+
+        public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app, IHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseGlobalizationConfiguration();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
+
+            return app;
+        }
+    }
+}
+```
+
+Startup:
+
+```
+services.AddMvcConfiguration();
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
@@ -482,7 +630,7 @@ Implementando a tag **[Moeda]** dentro da ViewModel, no campo Valor:
 public decimal Valor { get; set; }
 ```
 
-Injetar o **MoeadaAdapter** via injeção de dependência na Startup:
+Injetar o **MoeadaAdapter** via injeção de dependência na DependencyInjectionConfig, classe de configuração da Startup:
 
 ```
 services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
