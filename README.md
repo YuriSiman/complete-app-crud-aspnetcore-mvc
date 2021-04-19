@@ -36,6 +36,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
 - [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpfcnpj)  
 - [x] [Modal Window](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#modal-window)  
+- [x] [Busca CEP](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#busca-cep)  
 
 ---
 
@@ -631,6 +632,91 @@ function AjaxModal() {
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
 ---
+
+## Busca CEP
+
+Implementando o preenchimento do endereço automaticamente por meio do fornecimento do CEP. Com isso, evitamos o preenchimento de campos de forma incorreta e deixamos a busca mais segura. A implementação utiliza a consulta do webservice viacep.com.br/.
+
+site.js
+
+```
+function BuscaCep() {
+    $(document).ready(function () {
+
+        function limpa_formulário_cep() {
+            // Limpa valores do formulário de cep.
+            $("#Endereco_Logradouro").val("");
+            $("#Endereco_Bairro").val("");
+            $("#Endereco_Cidade").val("");
+            $("#Endereco_Estado").val("");
+        }
+
+        //Quando o campo cep perde o foco.
+        $("#Endereco_Cep").blur(function () {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = $(this).val().replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    $("#Endereco_Logradouro").val("...");
+                    $("#Endereco_Bairro").val("...");
+                    $("#Endereco_Cidade").val("...");
+                    $("#Endereco_Estado").val("...");
+
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?",
+                        function (dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#Endereco_Logradouro").val(dados.logradouro);
+                                $("#Endereco_Bairro").val(dados.bairro);
+                                $("#Endereco_Cidade").val(dados.localidade);
+                                $("#Endereco_Estado").val(dados.uf);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        });
+    });
+}
+```
+
+Com isso, basta fazer uso do script aonde deseja implementar a busca do CEP:
+
+```
+<script>
+        BuscaCep();
+</script>
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
 
 ## :vertical_traffic_light: Status do Projeto
 
