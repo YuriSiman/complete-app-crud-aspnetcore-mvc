@@ -5,7 +5,6 @@ using CompleteApp.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CompleteApp.App.Controllers
@@ -21,11 +20,13 @@ namespace CompleteApp.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("lista-de-categorias")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos()));
-        } 
+        }
 
+        [Route("dados-da-categoria/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var categoriaViewModel = await ObterCategoriaProdutos(id);
@@ -35,11 +36,13 @@ namespace CompleteApp.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [Route("nova-categoria")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("nova-categoria")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoriaViewModel categoriaViewModel)
@@ -52,6 +55,7 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("editar-categoria/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var categoriaViewModel = await ObterCategoriaProdutos(id);
@@ -61,6 +65,7 @@ namespace CompleteApp.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [Route("editar-categoria/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, CategoriaViewModel categoriaViewModel)
@@ -75,6 +80,7 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("excluir-categoria/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var categoriaViewModel = await ObterCategoriaProdutos(id);
@@ -84,6 +90,7 @@ namespace CompleteApp.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [Route("excluir-categoria/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

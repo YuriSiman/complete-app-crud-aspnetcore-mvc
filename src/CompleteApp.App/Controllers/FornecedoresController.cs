@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompleteApp.App.Controllers
 {
+
     public class FornecedoresController : MainController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
@@ -22,11 +23,13 @@ namespace CompleteApp.App.Controllers
             _enderecoRepository = enderecoRepository;
         }
 
+        [Route("lista-de-fornecedores")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos()));
         }
 
+        [Route("dados-do-fornecedor/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -36,11 +39,13 @@ namespace CompleteApp.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("novo-fornecedor")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("novo-fornecedor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
@@ -53,6 +58,7 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorProdutosEndereco(id);
@@ -62,6 +68,7 @@ namespace CompleteApp.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
@@ -76,6 +83,7 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("excluir-fornecedor/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -85,6 +93,7 @@ namespace CompleteApp.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("excluir-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -98,6 +107,17 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("obter-endereco-fornecedor/{id:guid}")]
+        public async Task<IActionResult> ObterEndereco(Guid id)
+        {
+            var fornecedorViewModel = await ObterFornecedorEndereco(id);
+
+            if (fornecedorViewModel == null) return NotFound();
+
+            return PartialView("_IndexEndereco", fornecedorViewModel);
+        }
+
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
         public async Task<IActionResult> EditEndereco(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -107,6 +127,7 @@ namespace CompleteApp.App.Controllers
             return PartialView("_EditEndereco", new FornecedorViewModel { Endereco = fornecedorViewModel.Endereco });
         }
 
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditEndereco(FornecedorViewModel fornecedorViewModel)
@@ -130,15 +151,6 @@ namespace CompleteApp.App.Controllers
         private async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)
         {
             return _mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterFornecedorProdutosEndereco(id));
-        }
-
-        public async Task<IActionResult> ObterEndereco(Guid id)
-        {
-            var fornecedorViewModel = await ObterFornecedorEndereco(id);
-
-            if (fornecedorViewModel == null) return NotFound();
-
-            return PartialView("_IndexEndereco", fornecedorViewModel);
         }
     }
 }
