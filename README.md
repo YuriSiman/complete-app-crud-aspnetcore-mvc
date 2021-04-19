@@ -39,6 +39,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpfcnpj)  
 - [x] [Modal Window](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#modal-window)  
 - [x] [Busca CEP](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#busca-cep)  
+- [x] [TagHelpers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#taghelpers)  
 
 ---
 
@@ -956,6 +957,54 @@ Com isso, basta fazer uso do script aonde deseja implementar a busca do CEP:
 
 ---
 
+## TagHelpers
+
+Implementando TagHelper customizada, classe EmailTagHelper:
+
+```
+namespace CompleteApp.App.Extensions.TagHelpers
+{
+    public class EmailTagHelper : TagHelper
+    {
+        public string EmailDomain { get; set; } = "yurisiman.com.br";
+
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
+            output.TagName = "a";
+
+            var content = await output.GetChildContentAsync();
+            var target = content.GetContent() + "@" + EmailDomain;
+
+            output.Attributes.SetAttribute("href", "mailto:" + target);
+            output.Content.SetContent(target);
+        }
+    }
+}
+```
+
+Importando a TagHelper na _ViewImports.cshtml
+
+```
+@using CompleteApp.App
+@using CompleteApp.App.ViewModels
+@using CompleteApp.App.Extensions
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper "*,CompleteApp.App"
+```
+
+Chamar a EmailTagHelper na Layout.cshtml
+
+```
+<footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - CompleteApp - <email>contato</email>
+        </div>
+    </footer>
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
 
 ## :vertical_traffic_light: Status do Projeto
 
