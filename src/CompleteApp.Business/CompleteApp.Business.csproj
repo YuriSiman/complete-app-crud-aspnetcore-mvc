@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Notifications\" />
-    <Folder Include="Validations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.0.4" />
   </ItemGroup>
 
 </Project>
