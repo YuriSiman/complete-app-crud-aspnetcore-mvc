@@ -1,12 +1,12 @@
 <h1 align="center">App Completo em ASP.NET Core MVC</h1>
 
-<p align="center">Aplicação completa em ASP.NET Core MVC, contemplando um CRUD completo.</p>
+<p align="center">Aplicação completa em ASP.NET Core MVC</p>
 
 ---
 
 ### :dart: Objetivo
 
-Tenho como objetivo implementar uma aplicação MVC completa em ASP.NET Core com C# contendo um CRUD completo dos dados, utilizando Entity Framework.  
+Tenho como objetivo implementar uma aplicação MVC completa em ASP.NET Core com C# contendo um CRUD completo dos dados, utilizando Entity Framework, Identity, Fluent API e outras tecnologias.  
 
 ### Clone
 
