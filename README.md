@@ -40,6 +40,9 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Modal Window](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#modal-window)  
 - [x] [Busca CEP](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#busca-cep)  
 - [x] [TagHelpers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#taghelpers)  
+- [x] [Fluent Validation](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#fluent-validation)  
+- [x] [Validations](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validations)  
+- [x] [Services](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#services)  
 
 ---
 
@@ -1000,6 +1003,66 @@ Chamar a EmailTagHelper na Layout.cshtml
             &copy; 2021 - CompleteApp - <email>contato</email>
         </div>
     </footer>
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Fluent Validation
+
+Biblioteca para validação de entidades para .NET. Instalar dentro da camada de negócios (Business)
+
+```
+Install-Package FluentValidation
+```
+
+O FluentValidation é uma biblioteca de validação para o .Net Framework que fornece uma interface fluente, que utiliza Expressões Lambdas para construir regras de validação para seus objetos de negócios. Este componente foi desenvolvido por um inglês chamado Jeremy Skinner e vem sendo constantemente atualizado pelo autor e outros colaboradores. 
+
+Fonte: https://www.devmedia.com.br/fluent-validation-biblioteca-de-validacao-revista-net-magazine-99/25658
+Creating your first validator: https://docs.fluentvalidation.net/en/latest/start.html
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Validations
+
+Criando as Validations dentro de Models para implementação das validações referente a cada entidade. Cada classe Validation deverá herdar da classe genérica  AbstractValidator<Entity>.  
+
+Ex: 
+
+```
+RuleFor(f => f.Nome)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+
+## Services
+
+Validar as entidades do lado da camada de negócio.
+
+Por que isso é tão importante?
+
+Os campos podem ser preenchidos com dados incorretos e inválidos e as validações da camada de apresentação não garantem a segurança das informações. Se o JavaScript for desabilitado, as informações podem ser submetidas com facilidade para a sua aplicação.
+
+Não devemos confiar nunca em dados vindos do client, devemos sempre trabalhar com validações double check, validando tanto no Front-End  quanto no Back-End.
+
+Devemos criar dentro da camada de Business as implementações necessárias para lidar com as regras de negócios, onde poderemos alterar o estado de uma entidade no banco por meio de uma implementação separada da camada de dados, os Services. Dentro das classes de Services teremos os métodos necessários para modificar e salvar o estado das entidades dentro do banco de dados, será uma responsabilidade única de Services, separada do Repository.
+
+Dentro da pasta Services iremos criar as classes de serviço ProdutoService, FornecedorService, CategoriaService que herdam da classe abstrata MainService.
+
+Também deve-se implementar interfaces referentes a cada serviço, pois dessa forma poderemos utilizar da injeção de dependência e forçaremos a implementação de um contrato, mantendo as boas práticas de programação.
+
+```
+ Task Adicionar(Fornecedor fornecedor);
+ Task Atualizar(Fornecedor fornecedor);
+ Task Remover(Guid id);
+ Task AtualizarEndereco(Endereco endereco);
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
