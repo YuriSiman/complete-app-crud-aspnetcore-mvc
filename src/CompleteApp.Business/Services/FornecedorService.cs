@@ -1,34 +1,31 @@
 ﻿using CompleteApp.Business.Interfaces;
 using CompleteApp.Business.Models;
+using CompleteApp.Business.Models.Validations.Enderecos;
+using CompleteApp.Business.Models.Validations.Fornecedores;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CompleteApp.Business.Services
 {
     public class FornecedorService : MainService, IFornecedorService
     {
-        public Task Adicionar(Fornecedor fornecedor)
+        public async Task Adicionar(Fornecedor fornecedor)
         {
             // Validar o estado da entidade
-
-            // Validar se não existe fornecedor com o mesmo documento
-            throw new NotImplementedException();
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor) && !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco))  return;
         }
 
-        public Task Atualizar(Fornecedor fornecedor)
+        public async Task Atualizar(Fornecedor fornecedor)
         {
-            throw new NotImplementedException();
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return;
         }
 
-        public Task AtualizarEndereco(Endereco endereco)
+        public async Task AtualizarEndereco(Endereco endereco)
         {
-            throw new NotImplementedException();
+            if (!ExecutarValidacao(new EnderecoValidation(), endereco)) return;
         }
 
-        public Task Remover(Guid id)
+        public async Task Remover(Guid id)
         {
             throw new NotImplementedException();
         }

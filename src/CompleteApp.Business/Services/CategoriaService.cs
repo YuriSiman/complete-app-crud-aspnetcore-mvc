@@ -1,26 +1,24 @@
 ﻿using CompleteApp.Business.Interfaces;
 using CompleteApp.Business.Models;
+using CompleteApp.Business.Models.Validations.Categorias;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CompleteApp.Business.Services
 {
     public class CategoriaService : MainService, ICategoriaService
     {
-        public Task Adicionar(Categoria categoria)
+        public async Task Adicionar(Categoria categoria)
         {
-            throw new NotImplementedException();
+            if (!ExecutarValidacao(new CategoriaValidation(), categoria)) return;
         }
 
-        public Task Atualizar(Categoria categoria)
+        public async Task Atualizar(Categoria categoria)
         {
-            throw new NotImplementedException();
+            if (!ExecutarValidacao(new CategoriaValidation(), categoria)) return;
         }
 
-        public Task Remover(Guid id)
+        public async Task Remover(Guid id)
         {
             throw new NotImplementedException();
         }

@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Notifications\" />
+    <Compile Remove="Notifications\**" />
+    <EmbeddedResource Remove="Notifications\**" />
+    <None Remove="Notifications\**" />
   </ItemGroup>
 
   <ItemGroup>
