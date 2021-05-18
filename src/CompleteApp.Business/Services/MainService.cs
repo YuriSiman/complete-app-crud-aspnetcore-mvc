@@ -1,16 +1,20 @@
-﻿using CompleteApp.Business.Models;
+﻿using CompleteApp.Business.Interfaces;
+using CompleteApp.Business.Models;
+using CompleteApp.Business.Notifications;
 using FluentValidation;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompleteApp.Business.Services
 {
     public abstract class MainService
     {
+        private readonly INotificador _notificador;
+
+        public MainService(INotificador notificador)
+        {
+            _notificador = notificador;
+        }
+
         protected void Notificar(ValidationResult validationResult)
         {
             foreach (var error in validationResult.Errors)
@@ -21,8 +25,7 @@ namespace CompleteApp.Business.Services
         
         protected void Notificar(string mensagem)
         {
-            // Propagar esse erro até a camada de apresen~tação
-
+            _notificador.Handle(new Notificacao(mensagem));
         }
 
         protected bool ExecutarValidacao<TV, TE>(TV validation, TE entity) where TV : AbstractValidator<TE> where TE : Entity

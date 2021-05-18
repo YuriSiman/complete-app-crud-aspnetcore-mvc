@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace CompleteApp.Business.Interfaces
 {
-    public interface ICategoriaService
+    public interface ICategoriaService : IDisposable
     {
         Task Adicionar(Categoria categoria);
         Task Atualizar(Categoria categoria);

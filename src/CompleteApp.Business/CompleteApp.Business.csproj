@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Notifications\**" />
-    <EmbeddedResource Remove="Notifications\**" />
-    <None Remove="Notifications\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.0.4" />
   </ItemGroup>
 

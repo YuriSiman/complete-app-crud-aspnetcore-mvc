@@ -12,11 +12,13 @@ namespace CompleteApp.App.Controllers
     public class CategoriasController : MainController
     {
         protected readonly ICategoriaRepository _categoriaRepository;
+        protected readonly ICategoriaService _categoriaService;
         protected readonly IMapper _mapper;
 
-        public CategoriasController(ICategoriaRepository categoriaRepository, IMapper mapper)
+        public CategoriasController(ICategoriaRepository categoriaRepository, ICategoriaService categoriaService ,IMapper mapper, INotificador notificador) : base(notificador)
         {
             _categoriaRepository = categoriaRepository;
+            _categoriaService = categoriaService;
             _mapper = mapper;
         }
 
@@ -50,7 +52,7 @@ namespace CompleteApp.App.Controllers
             if (!ModelState.IsValid) return View(categoriaViewModel);
 
             var categoria = _mapper.Map<Categoria>(categoriaViewModel);
-            await _categoriaRepository.Adicionar(categoria);
+            await _categoriaService.Adicionar(categoria);
 
             return RedirectToAction(nameof(Index));
         }
@@ -75,7 +77,7 @@ namespace CompleteApp.App.Controllers
             if (!ModelState.IsValid) return View(categoriaViewModel);
 
             var categoria = _mapper.Map<Categoria>(categoriaViewModel);
-            await _categoriaRepository.Atualizar(categoria);
+            await _categoriaService.Atualizar(categoria);
 
             return RedirectToAction(nameof(Index));
         }
@@ -99,7 +101,7 @@ namespace CompleteApp.App.Controllers
 
             if (categoriaViewModel == null) return NotFound();
 
-            await _categoriaRepository.Remover(id);
+            await _categoriaService.Remover(id);
 
             return RedirectToAction(nameof(Index));
         }

@@ -15,14 +15,16 @@ namespace CompleteApp.App.Controllers
         protected readonly IProdutoRepository _produtoRepository;
         protected readonly IFornecedorRepository _fornecedorRepository;
         protected readonly ICategoriaRepository _categoriaRepository;
+        private readonly IProdutoService _produtoService;
         protected readonly IMapper _mapper;
         protected readonly UploadFiles _uploadFiles;
 
-        public ProdutosController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, ICategoriaRepository categoriaRepository, IMapper mapper, UploadFiles uploadFiles)
+        public ProdutosController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, ICategoriaRepository categoriaRepository, IProdutoService produtoService, IMapper mapper, UploadFiles uploadFiles, INotificador notificador) : base(notificador)
         {
             _produtoRepository = produtoRepository;
             _fornecedorRepository = fornecedorRepository;
             _categoriaRepository = categoriaRepository;
+            _produtoService = produtoService;
             _mapper = mapper;
             _uploadFiles = uploadFiles;
         }
@@ -63,7 +65,9 @@ namespace CompleteApp.App.Controllers
             // Upload da Imagem
             if (!await UploadImagemProduto(produtoViewModel)) return View(produtoViewModel);
 
-            await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+            await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+
+            if (!OperacaoValida()) return View(produtoViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -90,7 +94,9 @@ namespace CompleteApp.App.Controllers
             //Update da Imagem
             if (!await UpdateImagemProduto(produtoViewModel, produtoAtualizado)) return View(produtoAtualizado);
 
-            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoAtualizado));
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizado));
+
+            if (!OperacaoValida()) return View(produtoViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -114,7 +120,9 @@ namespace CompleteApp.App.Controllers
 
             if (produtoViewModel == null) return NotFound();
 
-            await _produtoRepository.Remover(id);
+            await _produtoService.Remover(id);
+
+            if (!OperacaoValida()) return View(produtoViewModel);
 
             return RedirectToAction(nameof(Index));
         }
