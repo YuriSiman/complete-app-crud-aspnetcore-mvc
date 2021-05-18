@@ -55,6 +55,8 @@ namespace CompleteApp.App.Controllers
             var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
             await _fornecedorService.Adicionar(fornecedor);
 
+            if (!OperacaoValida()) return View(fornecedorViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -80,6 +82,8 @@ namespace CompleteApp.App.Controllers
             var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
             await _fornecedorService.Atualizar(fornecedor);
 
+            if (!OperacaoValida()) return View(await ObterFornecedorProdutosEndereco(id));
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -103,6 +107,10 @@ namespace CompleteApp.App.Controllers
             if (fornecedorViewModel == null) return NotFound();
 
             await _fornecedorService.Remover(id);
+
+            if (!OperacaoValida()) return View(fornecedorViewModel);
+
+            TempData["Sucesso"] = "Fornecedor excluído com sucesso!";
 
             return RedirectToAction(nameof(Index));
         }
@@ -138,6 +146,8 @@ namespace CompleteApp.App.Controllers
             if (!ModelState.IsValid) return PartialView("_EditEndereco", fornecedorViewModel);
 
             await _fornecedorService.AtualizarEndereco(_mapper.Map<Endereco>(fornecedorViewModel.Endereco));
+
+            if (!OperacaoValida()) return PartialView("_EditEndereco", fornecedorViewModel);
 
             var url = Url.Action("ObterEndereco", "Fornecedores", new { id = fornecedorViewModel.Endereco.FornecedorId });
             return Json(new { success = true, url });

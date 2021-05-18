@@ -54,6 +54,8 @@ namespace CompleteApp.App.Controllers
             var categoria = _mapper.Map<Categoria>(categoriaViewModel);
             await _categoriaService.Adicionar(categoria);
 
+            if (!OperacaoValida()) return View(categoriaViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -79,6 +81,8 @@ namespace CompleteApp.App.Controllers
             var categoria = _mapper.Map<Categoria>(categoriaViewModel);
             await _categoriaService.Atualizar(categoria);
 
+            if (!OperacaoValida()) return View(await ObterCategoriaProdutos(id));
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -102,6 +106,10 @@ namespace CompleteApp.App.Controllers
             if (categoriaViewModel == null) return NotFound();
 
             await _categoriaService.Remover(id);
+
+            if (!OperacaoValida()) return View(categoriaViewModel);
+
+            TempData["Sucesso"] = "Categoria excluída com sucesso!";
 
             return RedirectToAction(nameof(Index));
         }

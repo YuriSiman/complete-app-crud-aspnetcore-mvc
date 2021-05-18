@@ -124,6 +124,8 @@ namespace CompleteApp.App.Controllers
 
             if (!OperacaoValida()) return View(produtoViewModel);
 
+            TempData["Sucesso"] = "Produto excluído com sucesso!";
+
             return RedirectToAction(nameof(Index));
         }
 
