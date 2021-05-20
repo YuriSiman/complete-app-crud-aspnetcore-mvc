@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using CompleteApp.App.Extensions.Attributes.Authorize;
 using CompleteApp.App.ViewModels;
 using CompleteApp.Business.Interfaces;
 using CompleteApp.Business.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace CompleteApp.App.Controllers
 {
+    [Authorize]
     public class CategoriasController : MainController
     {
         protected readonly ICategoriaRepository _categoriaRepository;
@@ -22,12 +25,14 @@ namespace CompleteApp.App.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [Route("lista-de-categorias")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos()));
         }
 
+        [AllowAnonymous]
         [Route("dados-da-categoria/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -38,12 +43,14 @@ namespace CompleteApp.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [ClaimsAuthorize("Categoria", "Adicionar")]
         [Route("nova-categoria")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [ClaimsAuthorize("Categoria", "Adicionar")]
         [Route("nova-categoria")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -59,6 +66,7 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Categoria", "Editar")]
         [Route("editar-categoria/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -69,6 +77,7 @@ namespace CompleteApp.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [ClaimsAuthorize("Categoria", "Editar")]
         [Route("editar-categoria/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,6 +95,7 @@ namespace CompleteApp.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Categoria", "Excluir")]
         [Route("excluir-categoria/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -96,6 +106,7 @@ namespace CompleteApp.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [ClaimsAuthorize("Categoria", "Excluir")]
         [Route("excluir-categoria/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
