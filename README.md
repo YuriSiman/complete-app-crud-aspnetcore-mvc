@@ -45,6 +45,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Services](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#services)  
 - [x] [Identity](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#identity)  
 - [x] [Tratamento de Erros](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#tratamento-de-erros)  
+- [x] [Evitando Falhas de Segurança](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#evitando-falhas-de-segurança)  
 
 ---
 
@@ -1141,6 +1142,20 @@ else
 - Modificar a classe ErrorViewModel, implementando as propriedades ErroCode, Title e Message.
 - Modificar a classe HomeController, implementando o método Errors.
 - Modificar a View Error.
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+	
+## Evitando Falhas de Segurança
+
+Criar um arquivo web.config e configurar o redirecionamento https nele.
+
+Adicionar o AutoValidateAntiforgeryTokenAttribute abaixo, para que o token do seu request seja validado para toda a aplicação, dessa forma não precisaremos passar o [ValidateAntiForgeryToken] no Post de cada controller. Inserir o código dentro do MvcConfig.
+
+```
+o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
