@@ -43,6 +43,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Fluent Validation](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#fluent-validation)  
 - [x] [Validations](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validations)  
 - [x] [Services](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#services)  
+- [x] [Identity](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#identity)  
 
 ---
 
@@ -1063,6 +1064,55 @@ Também deve-se implementar interfaces referentes a cada serviço, pois dessa fo
  Task Atualizar(Fornecedor fornecedor);
  Task Remover(Guid id);
  Task AtualizarEndereco(Endereco endereco);
+```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+	
+## Identity
+
+Para realizar o controle de acesso dos usuários na sua aplicação, nós utilizaremos o **Identity** para Registro e Login do usuário e trabalharemos com **Claims** protejendo o acesso via cookies.
+
+Para isso, teremos que criar as classes:
+
+- ClaimsAuthorizeAttribute
+- CustomAuthorization
+- RequisitoClaimFilter
+
+Devemos adicionar as Claims dentro da base de dados em **AspNetUserClaims** para cada usuário, com isso, implementar o atributo **ClaimsAuthorize** nas controllers para fazer o controle de acesso via cookie.
+
+Implementar o [Authorize] para bloquear o acesso à classe.
+Implementar o [AllowAnonymous] para liberar o acesso às funcionalidades desejadas.
+Implementar o [ClaimsAuthorize("Fornecedor", "Adicionar")], como exemplo, para a implementação das Claims desejadas
+
+### Escondendo os botões de acesso	
+	
+Para esconder os botões que não deverão estar habilitados basta inserir nas tags o **supress-by-claim-name="Fornecedor"** e **supress-by-claim-valeu="Excluir"**
+
+```
+<a class="btn btn-danger" supress-by-claim-name="Fornecedor" supress-by-claim-value="Excluir" asp-controller="Fornecedores" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
+```
+ 
+Então, para que funcione, devemos criar uma classe TagHelper que se chamará **SupressByClaimTagHelper**, herdando de TagHelper. Devemos decorar a classe com os TargetsElements abaixo:
+
+```
+[HtmlTargetElement("*", Attributes = "supress-by-claim-name")]
+[HtmlTargetElement("*", Attributes = "supress-by-claim-value")]
+```
+
+
+Para desabilitar o link dos botões de acesso, devemos criar a classe TagHelper que se chamará **DisableLinkByClaimTagHelper**, herdando de TagHelper. Devemos decorar a classe com os TargetsElements abaixo:
+
+```
+[HtmlTargetElement("a", Attributes = "disable-by-claim-name")]
+[HtmlTargetElement("a", Attributes = "disable-by-claim-value")]
+```
+
+Para desabilitar os botões de acesso conforme a ação, devemos criar a classe TagHelper que se chamará **SupressElementByActionTagHelper**, herdando de TagHelper. Devemos decorar a classe com o TargetsElement abaixo:
+
+```
+[HtmlTargetElement("*", Attributes = "supress-by-action")]
 ```
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
