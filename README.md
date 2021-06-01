@@ -44,6 +44,7 @@ git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
 - [x] [Validations](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validations)  
 - [x] [Services](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#services)  
 - [x] [Identity](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#identity)  
+- [x] [Tratamento de Erros](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#tratamento-de-erros)  
 
 ---
 
@@ -1114,6 +1115,32 @@ Para desabilitar os botões de acesso conforme a ação, devemos criar a classe 
 ```
 [HtmlTargetElement("*", Attributes = "supress-by-action")]
 ```
+
+* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+
+---
+	
+## Tratamento de Erros
+
+Começaremos modificando o nosso caminho de retorno de erros dentro das Configurations da Startup, dentro da classe MvcConfig. No método UseMvcConfiguration, deixaremos nosso if assim:
+
+```	
+if (env.IsDevelopment())
+{
+	app.UseDeveloperExceptionPage();
+	app.UseMigrationsEndPoint();
+}
+else
+{
+	app.UseExceptionHandler("/erro/500");
+	app.UseStatusCodePagesWithRedirects("/erro/{0}");
+	app.UseHsts();
+}
+```
+
+- Modificar a classe ErrorViewModel, implementando as propriedades ErroCode, Title e Message.
+- Modificar a classe HomeController, implementando o método Errors.
+- Modificar a View Error.
 
 * [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
 
