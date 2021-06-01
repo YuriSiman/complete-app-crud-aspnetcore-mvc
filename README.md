@@ -1149,7 +1149,20 @@ else
 	
 ## Evitando Falhas de Segurança
 
-Criar um arquivo web.config e configurar o redirecionamento https nele.
+Criar um arquivo web.config e configure o redirecionamento https nele por meio do **Strict-Transport-Security** conforme abaixo:
+	
+```
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<system.webServer>
+		<httpProtocol>
+			<customHeaders>
+				<add name="Strict-Transport-Security" value="max-age=31536000" />
+			</customHeaders>
+		</httpProtocol>
+	</system.webServer>
+</configuration>
+```
 
 Adicionar o AutoValidateAntiforgeryTokenAttribute abaixo, para que o token do seu request seja validado para toda a aplicação, dessa forma não precisaremos passar o [ValidateAntiForgeryToken] no Post de cada controller. Inserir o código dentro do MvcConfig.
 
