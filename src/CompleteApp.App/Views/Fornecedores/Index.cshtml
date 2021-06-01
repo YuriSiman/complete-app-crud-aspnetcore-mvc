@@ -42,8 +42,8 @@
                 </td>
                 <td>
                     <a class="btn btn-info" asp-controller="Fornecedores" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
-                    <a class="btn btn-warning" asp-controller="Fornecedores" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
-                    <a class="btn btn-danger" asp-controller="Fornecedores" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
+                    <a class="btn btn-warning" disable-by-claim-name="Fornecedor" disable-by-claim-value="Editar" asp-controller="Fornecedores" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                    <a class="btn btn-danger" supress-by-claim-name="Fornecedor" supress-by-claim-value="Excluir" asp-controller="Fornecedores" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
                 </td>
             </tr>
         }
