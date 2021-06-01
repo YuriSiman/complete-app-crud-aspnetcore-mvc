@@ -1,7 +1,6 @@
 ﻿using CompleteApp.App.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
 namespace CompleteApp.App.Controllers
 {
@@ -24,10 +23,35 @@ namespace CompleteApp.App.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Errors(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var modelErro = new ErrorViewModel();
+
+            if(id == 500)
+            {
+                modelErro.Message = "Ocorreu um erro! Tente novamente mais tarde ou contate nosso suporte.";
+                modelErro.Title = "Ocorreu um erro!";
+                modelErro.ErroCode = id;
+            }
+            else if (id == 404)
+            {
+                modelErro.Message = "A página que está procurando não existe!<br />Em caso de dúvidas entre em contato com nosso suporte.";
+                modelErro.Title = "Ops! Página não encontrada.";
+                modelErro.ErroCode = id;
+            }
+            else if(id == 403)
+            {
+                modelErro.Message = "Você não tem permissão para fazer isso.";
+                modelErro.Title = "Acesso Negado";
+                modelErro.ErroCode = id;
+            }
+            else
+            {
+                return StatusCode(404);
+            }
+
+            return View("Error", modelErro);
         }
     }
 }
