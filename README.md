@@ -1088,7 +1088,7 @@ Implementar o [ClaimsAuthorize("Fornecedor", "Adicionar")], como exemplo, para a
 
 ### Escondendo os botões de acesso	
 	
-Para esconder os botões que não deverão estar habilitados basta inserir nas tags o **supress-by-claim-name="Fornecedor"** e **supress-by-claim-valeu="Excluir"**
+Para esconder os botões que não deverão estar habilitados basta inserir nas tags o `supress-by-claim-name="Fornecedor"` e `supress-by-claim-valeu="Excluir"`.
 
 ```
 <a class="btn btn-danger" supress-by-claim-name="Fornecedor" supress-by-claim-value="Excluir" asp-controller="Fornecedores" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
