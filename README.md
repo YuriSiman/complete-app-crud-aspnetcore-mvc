@@ -40,7 +40,7 @@ Use este projeto para aprender e contribua com melhorias! Bora estudar! :compute
 
 ## :pencil: Pré-requisitos
 
-1. Construído com .NET 6.0 e codificado em C#, se você não possui o dotnet instalado, acesse [aqui](https://dotnet.microsoft.com/) e instale a versão mais recente.
+1. Construído com .NET 5.0 e codificado em C#, se você não possui o dotnet instalado, acesse [aqui](https://dotnet.microsoft.com/) e instale a versão mais recente.
 2. Clone este repositório em sua máquina local
 
    ```sh
