@@ -1,122 +1,203 @@
-<h1 align="center">App Completo em ASP.NET Core MVC</h1>
+<div id="top"></div>
 
-<p align="center">Aplicação completa em ASP.NET Core MVC</p>
+<br/>
+<div align="center">
+    <img src="./readme-img/csharp-original.svg" alt="Logo" width="100" height="100" />
+    <img src="./readme-img/dotnetcore-original.svg" alt="Logo" width="100" height="100" />
+    <h1 align="center">ASP.NET Core MVC</h1>
+    <p align="center">Desenvolvimento de uma aplicação ASP.NET Core MVC</p>
+</div>
 
----
+<br/>
 
-### :dart: Objetivo
+<div align="center">
+    <a href="https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc/blob/master/LICENSE" target="_blank">
+      <img alt="LICENSE" src="https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github" />
+    </a>
+    <a href="https://github.com/YuriSiman" target="_blank">
+      <img alt="GitHub" src="https://img.shields.io/badge/github-perfil-%237159c1?style=for-the-badge&logo=github" />
+    </a>
+    <a href="https://yurisiman.com.br" target="_blank">
+      <img alt="Site" src="https://img.shields.io/badge/site-yurisiman-E0A80D?style=for-the-badge&logo=Purism" />
+    </a>
+    <a href="https://www.linkedin.com/in/yurisiman/" target="_blank">
+      <img alt="Linkedin" src="https://img.shields.io/badge/linkedin-social-0A66C2?style=for-the-badge&logo=LinkedIn" />
+    </a>
+    <a href="mailto:contato@yurisiman.com.br" target="_blank">
+      <img alt="Gmail" src="https://img.shields.io/badge/email-contato-EA4335?style=for-the-badge&logo=Gmail" />
+    </a>
+</div>
 
-Tenho como objetivo implementar uma aplicação MVC completa em ASP.NET Core com C# contendo um CRUD completo dos dados, utilizando Entity Framework, Identity, Fluent API e outras tecnologias.  
+<br/>
 
-### Clone
+## :clipboard: Sobre o Projeto
 
-Clone este repositório em sua máquina local usando:  
+O objetivo deste projeto é implementar uma aplicação ASP.NET Core MVC utilizando C#, a aplicação contém um CRUD completo dos dados, utilizando Entity Framework para persistência, Identity para autenticação do usuário, Fluent API e outras tecnologias.
 
-```
-git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
-```
-
-### :pencil2: Progresso
-
-- [x] [Setup Inicial da Aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#setup-inicial-da-aplicação)  
-- [x] [Instalar Pacotes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#instalar-pacotes)  
-- [x] [Adicionar Referências aos Projetos](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#adicionar-referências-aos-projetos)  
-- [x] [Definir as entidades da aplicação](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#definir-as-entidades-da-aplicação)  
-- [x] [Configurando Variáveis de Ambiente](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurando-variáveis-de-ambiente)  
-- [x] [Configurations](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurations)  
-- [x] [Configurar seu DbContext](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-seu-dbcontext)  
-- [x] [Configurar o mapeamento de suas entidades com FluentAPI](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#configurar-o-mapeamento-de-suas-entidades-com-fluentapi)  
-- [x] [Gerar Migrations, Data Base e Scripts](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#gerar-migrations-data-base-e-scripts)  
-- [x] [Repository Pattern](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#repository-pattern)  
-- [x] [ViewModels](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#viewmodels)  
-- [x] [AutoMapper](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#automapper)  
-- [x] [Controllers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#controllers)  
-- [x] [Views](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#views)  
-- [x] [Upload de Arquivos - Imagens](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#upload-de-arquivos---imagens)  
-- [x] [Globalizando a Aplicação em pt-BR](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#globalizando-a-aplicação-em-pt-br)  
-- [x] [Validações de Campos em Português](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validações-de-campos-em-português)  
-- [x] [Attributes](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#attributes)  
-- [x] [RazorExtensions - Formatação de CPF/CNPJ](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#razorextensions---formatação-de-cpfcnpj)  
-- [x] [Modal Window](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#modal-window)  
-- [x] [Busca CEP](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#busca-cep)  
-- [x] [TagHelpers](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#taghelpers)  
-- [x] [Fluent Validation](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#fluent-validation)  
-- [x] [Validations](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#validations)  
-- [x] [Services](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#services)  
-- [x] [Identity](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#identity)  
-- [x] [Tratamento de Erros](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#tratamento-de-erros)  
-- [x] [Evitando Falhas de Segurança](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#evitando-falhas-de-segurança)  
+Use este projeto para aprender e contribua com melhorias! Bora estudar! :computer::coffee:
 
 ---
 
-## :rocket: Vamos Começar 
+## :pencil: Pré-requisitos
 
-## Setup Inicial da Aplicação 
+1. Construído com .NET 6.0 e codificado em C#, se você não possui o dotnet instalado, acesse [aqui](https://dotnet.microsoft.com/) e instale a versão mais recente.
+2. Clone este repositório em sua máquina local
 
-A aplicação consiste em três camadas:  
-
-**App** - configuração do projeto ASP.NET Core MVC Web Application. Nele está contido as configurações da aplicação, as views em HTML, nossas Controllers, o Identity para autenticação de usuários, configurações de ambiente e banco de dados, nossa classe Startup e nosso método Main.  
-**Business** - configuração de uma Class Library .NET Core para as regras de negócio da aplicação, camada de domínio. Onde se encontra as Entidades de negócio, notificações, validações e serviços.  
-**Data** - configuração de uma Class Library .NET Core para a camada de dados da aplicação, nele está contido o DbContext para o contexto de dados, as referências ao Entity Framework, Mappings, Migrations e Repositórios.  
-
-<img src="./readme-images/setup.png" />
-
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+   ```sh
+   git clone https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc.git
+   ```
 
 ---
 
-## Instalar Pacotes
+## :dart: Tópicos
 
-Pacotes a serem instalados pelo Package Manager Console ou Manage NuGet Packages:  
+<details>
+  <summary>Configurações Iniciais</summary>
+  <ul>
+    <li><a href="#setup-inicial-da-aplicacao">Setup Inicial da Aplicação</a></li>
+    <li><a href="#instalacao-de-pacotes">Instalação de Pacotes</a></li>
+    <li><a href="#referencia-de-projetos">Referência de Projetos</a></li>
+    <li><a href="#entidades">Entidades</a></li>
+    <li><a href="#variaveis-de-ambiente">Variáveis de Ambiente</a></li>
+    <li><a href="#configurations">Configurations</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Banco de Dados</summary>
+  <ul>
+    <li><a href="#dbcontext">DbContext</a></li>
+    <li><a href="#mappings">Mappings</a></li>
+    <li><a href="#migrations">Migrations</a></li>
+    <li><a href="#repository-pattern">Repository Pattern</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Mapeamento de Objetos</summary>
+  <ul>
+    <li><a href="#viewmodels">ViewModels (DTO)</a></li>
+    <li><a href="#automapper">AutoMapper</a></li>
+  </ul>
+</details>
+<details>
+  <summary>MVC (Controllers e Views)</summary>
+  <ul>
+    <li><a href="#controllers">Controllers</a></li>
+    <li><a href="#views">Views</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Customizações</summary>
+  <ul>
+    <li><a href="#upload-de-arquivos">Upload de Arquivos</a></li>
+    <li><a href="#globalizando-a-aplicacao">Globalizando a Aplicação em pt-BR</a></li>
+    <li><a href="#validacoes-de-campos">Validações de Campos em Português</a></li>
+    <li><a href="#attributes">Attributes</a></li>
+    <li><a href="#razor-extensions">RazorExtensions - Formatação de CPF/CNPJ</a></li>
+    <li><a href="#modal-window">Modal Window</a></li>
+    <li><a href="#busca-cep">Busca CEP</a></li>
+    <li><a href="#tag-helpers">TagHelpers</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Validations e Service</summary>
+  <ul>
+    <li><a href="#fluent-validation">Fluent Validation</a></li>
+    <li><a href="#validations">Validations</a></li>
+    <li><a href="#services">Services</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Segurança e Autenticação do Usuário</summary>
+  <ul>
+    <li><a href="#identity">Identity</a></li>
+    <li><a href="#tratamento-de-erros">Tratamento de Erros</a></li>
+    <li><a href="#evitando-falhas-de-segurança">Evitando Falhas de Segurança</a></li>
+  </ul>
+</details>
 
-Projeto - Camada App  
-```
+---
+
+## :rocket: Vamos Começar
+
+### Configurações Iniciais
+
+<div id="setup-inicial-da-aplicacao"></div>
+
+### Setup Inicial da Aplicação    
+
+A aplicação consiste em três camadas:
+
+Api - configuração do projeto ASP.NET Core Web API. Nele está contido as configurações da aplicação, nossas Controllers, o Identity para autenticação de usuários, configurações de ambiente, nossa classe Startup e nosso método Main. Ela será a camada que fará toda a comunicação e tráfego de dados.
+
+Business - configuração de uma Class Library .NET Core para as regras de negócio da aplicação, camada de domínio. Onde se encontra as Entidades de negócio, notificações, validações e serviços.
+
+Data - configuração de uma Class Library .NET Core para a camada de dados da aplicação, nele está contido o DbContext para o contexto de dados, as referências ao Entity Framework, Mappings, Migrations e Repositórios.
+
+<img src="./readme-img/setup.png" />
+
+<p align="right"><a href="#top">Início ↑</a></p>
+
+---
+
+<div id="instalacao-de-pacotes"></div>
+
+### Instalação de Pacotes  
+
+Pacotes a serem instalados pelo Package Manager Console ou Manage NuGet Packages:
+
+Projeto - Camada Api
+
+```sh
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 Install-Package Microsoft.EntityFrameworkCore.Design
 Install-Package Automapper.Extensions.Microsoft.DependencyInjection
 ```
-  
-Projeto - Camada Data  
-```
+
+Projeto - Camada Data
+
+```sh
 Install-Package Microsoft.EntityFrameworkCore
 Install-Package Microsoft.EntityFrameworkCore.Relational
 Install-Package Microsoft.EntityFrameworkCore.Tools
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Adicionar Referências aos Projetos  
+<div id="referencia-de-projetos"></div>
 
-Projeto - Camada App
+### Referência de Projetos
 
-<img src="./readme-images/app-reference.png" />
+Projeto - Camada Api: Referência com o projeto Business e Data  
+<img src="./readme-img/app-reference.png" />
+Projeto - Camada Data: Referência com o projeto Business  
+<img src="./readme-img/data-reference.png" />
 
-Projeto - Camada Data
-
-<img src="./readme-images/data-reference.png" />
-
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
-
----
-
-## Definir as entidades da aplicação
-
-Modelo Entidade-Relacionamento conforme a utilização do Entity Framework.
-
-<img src="./readme-images/entidade-relacionamento.png" />
-
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Configurando Variáveis de Ambiente
+<div id="entidades"></div>
 
-Alterando o **construtor da Startup**, para que se possa permitir a configuração de **appsettings** para cada tipo de ambiente:
+### Entidades 
 
-```
+Modelo Entidade-Relacionamento
+
+<img src="./readme-img/entidade-relacionamento.png" alt="Logo" width="500" height="500" />
+
+<p align="right"><a href="#top">Início ↑</a></p>
+
+---
+
+<div id="variaveis-de-ambiente"></div>
+
+### Variáveis de Ambiente  
+
+Alterando o construtor da Startup, para que se possa permitir a configuração de appsettings para cada tipo de ambiente.
+
+```csharp
 public Startup(IHostEnvironment hostEnvironment)
         {
             var builder = new ConfigurationBuilder()
@@ -134,15 +215,15 @@ public Startup(IHostEnvironment hostEnvironment)
         }
 ```
 
-Craindo arquivos **appsettings** para cada tipo de ambiente: 
+Craindo arquivos appsettings para cada tipo de ambiente:
 
 - appsettings.Development.json
 - appsettings.Staging.json
 - appsettings.Production.json
 
-Modificando arquivo **launchSettings.json** para cada tipo de ambiente:
+Modificando arquivo launchSettings.json para cada tipo de ambiente:
 
-```
+```csharp
 {
   "iisSettings": {
     "windowsAuthentication": false,
@@ -198,18 +279,20 @@ Modificando arquivo **launchSettings.json** para cada tipo de ambiente:
 }
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>  
 
 ---
 
-## Configurations
+<div id="configurations"></div>
+
+### Configurations  
 
 Implementando pasta Configurations onde serão criadas as classes de configuração da Startup, tendo como objetivo desacoplar a classe Startup, deixando-a mais limpa e reduzida. As classes de Configuração precisarão implementar métodos de extensão do IServiceCollection, IConfiguration, IApplicationBuilder e IHostEnvironment. As configurações irão variar conforme a sua necessidade. Segue abaixo exemplo de configuração do DbContext.
 
 DbContextConfig:
 
-```
-namespace CompleteApp.App.Configurations
+```csharp
+namespace CompleteApi.Api.Configurations
 {
     public static class DbContextConfig
     {
@@ -226,41 +309,42 @@ namespace CompleteApp.App.Configurations
 
 Startup:
 
-```
+```csharp
 public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContextConfiguration(Configuration);
-        }
+{
+   services.AddDbContextConfiguration(Configuration);
+}
 ```
 
 Exemplos de Configurations a serem implementadas:
 
 - DbContextConfig
 - DependencyInjectionConfig
-- GlobalizationConfig
-- IdentityConfig
+- SwaggerConfig
 - MvcConfig
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Configurar seu DbContext
+### Banco de Dados
 
-#### Contexto de Dados
+<div id="dbcontext"></div>
 
-O seu contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação. Deve-se sobrescrever o método OnModelCreating, para que nele possamos pegar nosso contexto de dados, buscar todas as entidades mapeadas pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.  
+### DbContext    
 
-No método OnModelCreating também podemos **desabilitar** o **Cascade Delete**, ou seja, desabilitar a exclusão de objetos ligados diretamente a uma outra entidade. Ex: excluir um fornecedor e todos os seus produtos juntos.
+Contexto de Dados
+O seu contexto de dados deve herdar da classe DbContext, implementando as propriedades DbSet referente a cada entidade da sua aplicação. Deve-se sobrescrever o método OnModelCreating, para que nele possamos pegar nosso contexto de dados, buscar todas as entidades mapeadas pelo DbSet e buscar classes que implementam a interface IEntityTypeConfiguration, ou seja, ele pegará cada um dos Mappings a serem implementados e fará o mapeamento de uma vez só.
 
-#### Configurando seu DbContext na configuração da classe Startup - DbContextConfig
+No método OnModelCreating também podemos desabilitar o Cascade Delete, ou seja, desabilitar a exclusão de objetos ligados diretamente a uma outra entidade. Ex: excluir um fornecedor e todos os seus produtos juntos.
 
+Configurando seu DbContext na configuração da classe Startup - DbContextConfig
 É necessário configurar o serviço do seu contexto de dados dentro da sua classe Startup, no método ConfigureServices. Para isso, iremos implementar dentro da classe de configuração DbContextConfig. Segue exemplo de implementação abaixo.
 
 DbContextConfig:
 
-```
-namespace CompleteApp.App.Configurations
+```csharp
+namespace CompleteApi.Api.Configurations
 {
     public static class DbContextConfig
     {
@@ -277,15 +361,14 @@ namespace CompleteApp.App.Configurations
 
 Startup:
 
-```
-	services.AddDbContextConfiguration(Configuration);
-
+```csharp
+services.AddDbContextConfiguration(Configuration);
 ```
 
 Também é preciso configurar o serviço para injeção de dependência do seu DbContext na classe Startup, no método ConfigureServices, para isso, criaremos uma nova classe de configuração chamada DependencyInjectionConfig. E lá, faremos a injeção de dependência.
 
-```
-namespace CompleteApp.App.Configurations
+```csharp
+namespace CompleteApi.Api.Configurations
 {
     public static class DependencyInjectionConfig
     {
@@ -301,70 +384,76 @@ namespace CompleteApp.App.Configurations
 
 Depois, chamaremos o serviço dentro da Startup:
 
-``` 
-	services.ResolveDependencies();
+```csharp
+services.ResolveDependencies();
 ```
 
-#### Configurando o arquivo appsettings.json
+Configurando o arquivo appsettings.json
 
-Após a implementação do DbContext na Startup, é necessário passar as informações do banco de dados na **ConnectionStrings** dentro do arquivo appsettings.json. Essa **ConnectionString** possui a **DefaultConnection** que é chamada dentro do serviço que adiciona o seu contexto de dados na sua classe Startup.  
+Após a implementação do DbContext na Startup, é necessário passar as informações do banco de dados na ConnectionStrings dentro do arquivo appsettings.json. Essa ConnectionString possui a DefaultConnection que é chamada dentro do serviço que adiciona o seu contexto de dados na sua classe Startup.
 
-```
+```csharp
 "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SeuDb;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Configurar o mapeamento de suas entidades com FluentAPI
+<div id="mappings"></div>
 
-Mapeando as entidades para o banco de dados com o FluentApi, é o ideal para não poluir suas entidades com os DataAnnotations. Para o mapeamento é feita a implementação da interface IEntityTypeConfiguration<Entity>, com a qual é criada uma classe para mapeamento específico de cada entidade, definindo campos como Primary Key, definindo o tipo da propriadade a ser inserida na base, o nome de cada tabela na base de dados e o relacionamento entre as entidades. 
+### Mappings
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+Criando o mapeamento e relacionamento das entidades no banco de dados...
+
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Gerar Migrations, Data Base e Scripts
+<div id="migrations"></div>
 
-Package Manager Console  
+### Migrations  
 
-Gerando Migrations  
+Package Manager Console
 
-```
+Gerando Migrations
+
+```sh
 Add-Migration NomeMigration -Context SeuDbContext
 ```
 
-Gerando Base de Dados  
+Gerando Base de Dados
 
-```
+```sh
 Update-Database -Context SeuDbContext
 ```
 
-Gerando Scripts Idempotentes  
+Gerando Scripts Idempotentes
 
-```
+```sh
 Script-Migration -Idempotent
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Repository Pattern
+<div id="repository-pattern"></div>
 
-O repository pattern é implementado nesta aplicação para que as camadas de Business e App possuam um meio de acesso para conversar com o banco de dados, que não seja diretamente pelo DbContext, pois, não é adequado injetar o DbContext diretamente nas Controllers, devemos sempre buscar o desacoplamento do meio de acesso a dados.  
+### Repository Pattern
 
-#### IRepository - Camada Business
+O repository pattern é implementado nesta aplicação para que as camadas de Business e App possuam um meio de acesso para conversar com o banco de dados, que não seja diretamente pelo DbContext, pois, não é adequado injetar o DbContext diretamente nas Controllers, devemos sempre buscar o desacoplamento do meio de acesso a dados.
 
-Devemos criar a interface genérica IRepository<TEntity> dentro da camada de Negócios **(Business)** para que a camada de Negócios não tenha nenhuma referência com a camada de Dados **(Data)**, ela irá "conversar" com a camada de dados por meio da interface IRepository<TEntity>, para que ela possa fornecer os métodos necessários para os repositórios que ficarão na camada de dados.  
-Esta interface deverá implementar a interface **IDisposable** para obrigar que o repositório faça a liberação de memória. Outro detalhe é o fato de podermos configurar para que a interface IRepository<TEntity> apenas seja utilizada por entidades que sejam filhas (que herdem) da classe **Entity**.
+IRepository - Camada Business
+
+Devemos criar a interface genérica IRepository dentro da camada de Negócios (Business) para que a camada de Negócios não tenha nenhuma referência com a camada de Dados (Data), ela irá "conversar" com a camada de dados por meio da interface IRepository, para que ela possa fornecer os métodos necessários para os repositórios que ficarão na camada de dados.
+Esta interface deverá implementar a interface IDisposable para obrigar que o repositório faça a liberação de memória. Outro detalhe é o fato de podermos configurar para que a interface IRepository apenas seja utilizada por entidades que sejam filhas (que herdem) da classe Entity.
 
 Seguem os métodos assíncronos a serem implementados na interface genérica:
 
-```
+```csharp
 Task Adicionar(TEntity entity);
 Task<TEntity> ObterPorId(Guid id);
 Task<List<TEntity>> ObterTodos();
@@ -374,89 +463,98 @@ Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
 Task<int> SaveChanges();
 ```
 
-Agora deve-se criar as interfaces referentes a cada entidade que será persistida no banco de dados da sua aplicação, e cada uma delas deverá implementar a interface genérica **IRepository**. Isso nos dará uma maior autonomia para manipular dados de forma independente para cada entidade.  
+Agora deve-se criar as interfaces referentes a cada entidade que será persistida no banco de dados da sua aplicação, e cada uma delas deverá implementar a interface genérica IRepository. Isso nos dará uma maior autonomia para manipular dados de forma independente para cada entidade.
 
-#### Repository - Camada Data
+Repository - Camada Data
 
-Criando classe abstrata e genérica Repository<TEntity> implementando a interface genérica IRepository<TEntity>, onde a entidade TEntity precisar ser filha (herdar) da entidade abstrata **Entity**.  
-Nesta classe serão implementados os métodos da interface para a persistência dos dados da aplicação. Os métodos são assíncronos possuindo o termo **async** e podemos também implementar o **virtual** para que os mesmos possam ser sobrescritos.  
+Criando classe abstrata e genérica Repository implementando a interface genérica IRepository, onde a entidade TEntity precisar ser filha (herdar) da entidade abstrata Entity.
+Nesta classe serão implementados os métodos da interface para a persistência dos dados da aplicação. Os métodos são assíncronos possuindo o termo async e podemos também implementar o virtual para que os mesmos possam ser sobrescritos.
 
-Agora deve-se criar as classes referentes a cada entidade que será persistida no banco de dados da sua aplicação, e cada uma delas deverá herdar de Repository<EntidadeAtual> (a entidade correspondente da classe) e também implementar a interface correspondente à mesma entidade. Os métodos são assíncronos possuindo o termo **async**.
+Agora deve-se criar as classes referentes a cada entidade que será persistida no banco de dados da sua aplicação, e cada uma delas deverá herdar de Repository (a entidade correspondente da classe) e também implementar a interface correspondente à mesma entidade. Os métodos são assíncronos possuindo o termo async.
 
-#### Configurando os repositórios na classe Startup por meio de injeção de dependência
-
+Configurando os repositórios na classe Startup por meio de injeção de dependência
 É preciso configurar o serviço para injeção de dependência dos seus repositórios na classe Startup, no método ConfigureServices, para isso, utilizaremos nossa classe de configuração de injeção de dependência DependencyInjectionConfig e colocaremos conforme o exemplo abaixo:
 
-```
+```csharp
 services.AddScoped<IProdutoRepository, ProdutoRepository>();
 services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## ViewModels
+### Mapeamento de Objetos
 
-Troca de informação entre os modelos de negócio (Business) com os modelos que serão exibidos na camada de apresentação (App), replicando os modelos de negócio para modelos intermediários chamados de **ViewModels** ou **DTO** (Data Transfer Object).  
+<div id="viewmodels"></div>
 
-Não queremos "deformar" nossas entidades de negócio colocando campos que não serão mapeados no banco, mapeando propriedades que não são ligados à regra de negócio... queremos simplesmente criar modelos que sejam passíveis de serem exibidos na tela. Então, devemos criar uma **ViewModel** para cada **Model** existente em nossa camada de negócio. As **ViewModels** criadas precisam ter as **propriedades** necessárias e também o **Id** referente a cada entidade (uma vez que não iremos herdar de nenhuma Entity).  
+### ViewModels (DTO)    
 
-#### Data Annotations
+Troca de informação entre os modelos de negócio (Business) com os modelos que serão exibidos na camada de apresentação (App), replicando os modelos de negócio para modelos intermediários chamados de ViewModels ou DTO (Data Transfer Object).
 
-Devemos implementar os Data Annotations para mapear cada propriedade referente a cada **ViewModel**.  
+Não queremos "deformar" nossas entidades de negócio colocando campos que não serão mapeados no banco, mapeando propriedades que não são ligados à regra de negócio... queremos simplesmente criar modelos que sejam passíveis de serem exibidos na tela. Então, devemos criar uma ViewModel para cada Model existente em nossa camada de negócio. As ViewModels criadas precisam ter as propriedades necessárias e também o Id referente a cada entidade (uma vez que não iremos herdar de nenhuma Entity).
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+Data Annotations
+
+Devemos implementar os Data Annotations para mapear cada propriedade referente a cada ViewModel.
+
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## AutoMapper
+<div id="automapper"></div>
 
-Package Manager Console  
+### AutoMapper  
 
-Projeto - Camada App  
+Package Manager Console
 
-```
+Projeto - Camada App
+
+```sh
 Install-Package Automapper.Extensions.Microsoft.DependencyInjection
 ```
 
-Fazendo a transformação de **ViewModel** para **Model** e **Model** para **ViewModel** com **Automapper**.
+Configurando o Automapper na classe Startup
 
-#### Configurando o Automapper na classe Startup
+É preciso configurar o serviço do AutoMapper na classe Startup, no método ConfigureServices, conforme o exemplo abaixo:
 
-É preciso configurar o serviço do AutoMapper na classe Startup, no método ConfigureServices, conforme o exemplo abaixo:  
-
-```
+```csharp
 services.AddAutoMapper(typeof(Startup));
 ```
 
-Devemos criar uma classe AutoMapperConfig para configuração do Automapper, a classe deverá herdar de **Profile**. Nesta classe será definido o mapeamento das ViewModels e Models, segue exemplo abaixo:  
+Devemos criar uma classe AutoMapperConfig para configuração do Automapper, a classe deverá herdar de Profile. Nesta classe será definido o mapeamento das ViewModels e Models, segue exemplo abaixo:
 
-```
+```csharp
 public AutoMapperConfig()
-        {
-            CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
-            CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
-            CreateMap<Produto, ProdutoViewModel>().ReverseMap();
-            CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
-        }
+{
+   CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
+   CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
+   CreateMap<Produto, ProdutoViewModel>().ReverseMap();
+   CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
+}
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Controllers
+### MVC (Constrollers e Views)
+
+<div id="controllers"></div>
+
+### Controllers
 
 Ao criar cada Controller nós devemos chamar o repositório referente a cada uma delas pela interface para que tenhamos o meio de acesso a dados, também chamaremos nosso AutoMapper para fazer o mapeamento de Model e ViewModel.
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Views
+<div id="views"></div>
+
+### Views
 
 Para cada Controller criada, também criaremos as View. Podemos criar o modelo inicial das Views por meio do Visual Studio 2019, gerando automaticamente por Scaffolded as telas baseadas em nossas ViewModels, são elas:
 
@@ -468,23 +566,27 @@ Edit
 Index
 ```
 
-Segue passo a passo para criar cada uma das Views:
+Passo a passo para criar cada uma das Views:
 
-<img src="./readme-images/gerando-view1.png" />
-<img src="./readme-images/gerando-view2.png" />
-<img src="./readme-images/gerando-view.3.png" />
+<img src="./readme-img/gerando-view1.png" />
+<img src="./readme-img/gerando-view2.png" />
+<img src="./readme-img/gerando-view.3.png" />
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Upload de Arquivos - Imagens
+### Customizações
+
+<div id="upload-de-arquivos"></div>
+
+### Upload de Arquivos
 
 Para configurar o Upload de arquivos, será criado uma classe chamada UploadFiles, dentro de uma pasta Extensions. Essa classe terá um método para o Upload de Imagens, chamando o caminho com o qual ficarão as imagens ```wwwroot/img```.
 
 Segue método a ser implementado para o Upload de imagens.
 
-```
+```csharp
 public async Task<bool> UploadImage(IFormFile arquivo, string imgPrefixo)
         {
             if (arquivo.Length <= 0) return false;
@@ -506,30 +608,31 @@ Esta classe será chamada na Controller que precisará realizar o Upload de Imag
 
 Lembrando que devemos adicionar o serviço em nossa Startup para a injeção de dependência, com isso, iremos utilizar nossa classe de configuração DependencyInjectionConfig e adicionaremos nela o exemplo abaixo:
 
-```
+```csharp
 services.AddScoped<UploadFiles>();
 ```
 
 Na Controller deverão ser criados os métodos necessários para a manipulação de Upload e Update das imagens.
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Globalizando a Aplicação em pt-BR
+<div id="globalizando-a-aplicacao"></div>
+
+### Globalizando a Aplicação em pt-BR
 
 Para que nossa aplicação se comporte em pt-BR devemos implementar configurações de Globalização. Seguem abaixo as configurações implementadas:
 
+- _Layout.cshtml
 
-* _Layout.cshtml
-
-```
+```csharp
 @System.Globalization.CultureInfo.CurrentUICulture
 ```
 
-* GlobalizationConfig.cs - Método de configuração da Startup
+- GlobalizationConfig.cs - Método de configuração da Startup
 
-```
+```csharp
 namespace CompleteApp.App.Configurations
 {
     public static class GlobalizationConfig
@@ -551,16 +654,15 @@ namespace CompleteApp.App.Configurations
 }
 ```
 
+- Startup.cs - Método Configure (Esta implementação ficará na classe MvcConfig)
 
-* Startup.cs - Método Configure (Esta implementação ficará na classe MvcConfig)
-
-```
+```csharp
 app.UseGlobalizationConfiguration();
 ```
 
-* _ValidationScriptsPartial.cshtml - Script para globalizar moedas e datas
+- _ValidationScriptsPartial.cshtml - Script para globalizar moedas e datas
 
-```
+```html
 <script>
     $.validator.methods.range = function (value, element, param) {
         var globalizedValue = value.replace(",", ".");
@@ -576,15 +678,17 @@ app.UseGlobalizationConfiguration();
 </script>
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Validações de Campos em Português
+<div id="validacoes-de-campos"></div>
 
-Traduzindo todas as possíveis mensagens de erro das validações do ```ModelBindingMessageProvider``` para Português, implementação realizada dentro da **MvcConfig** (Classe de configuração da Startup).
+### Validações de Campos em Português
 
-```
+Traduzindo todas as possíveis mensagens de erro das validações do **ModelBindingMessageProvider** para Português, implementação realizada dentro da MvcConfig (Classe de configuração da Startup).
+
+```csharp
 namespace CompleteApp.App.Configurations
 {
     public static class MvcConfig
@@ -649,21 +753,23 @@ namespace CompleteApp.App.Configurations
 
 Startup:
 
-```
+```csharp
 services.AddMvcConfiguration();
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Attributes
+<div id="attributes"></div>
 
-Criando na pasta Extensions os Attributes para a customização de DataAnnotations. Implementar classes para tratamento tanto no client quanto no server.  
+### Attributes
 
-* Moedas - MoedaAttribute
+Criando na pasta Extensions os Attributes para a customização de DataAnnotations. Implementar classes para tratamento tanto no client quanto no server.
 
-```
+- Moedas - MoedaAttribute
+
+```csharp
 // MoedaAttribute.cs
 
 public class MoedaAttribute : ValidationAttribute
@@ -720,59 +826,61 @@ public class MoedaValidationAttributeAdapterProvider : IValidationAttributeAdapt
   }
 ```
 
-Implementando a tag **[Moeda]** dentro da ViewModel, no campo Valor:
+Implementando a tag [Moeda] dentro da ViewModel, no campo Valor:
 
-```
+```csharp
 [Moeda]
 [Required(ErrorMessage = "O campo {0} é obrigatório")]
 public decimal Valor { get; set; }
 ```
 
-Injetar o **MoeadaAdapter** via injeção de dependência na DependencyInjectionConfig, classe de configuração da Startup:
+Injetar o MoeadaAdapter via injeção de dependência na DependencyInjectionConfig, classe de configuração da Startup:
 
-```
+```csharp
 services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
 ```
 
-Por fim, podemos formatar o campo **Valor** em todoas as Views para que o valor seja exibido formatado conforme a sua moeda:
+Por fim, podemos formatar o campo Valor em todoas as Views para que o valor seja exibido formatado conforme a sua moeda:
 
-* Details.cshtml
+- Details.cshtml
 
-```
+```html
 <dd class="col-sm-10">
   @Model.Valor.ToString("C")
 </dd>
 ```
 
-* Index.cshtml
+- Index.cshtml
 
-```
+```html
 <td>
   @item.Valor.ToString("C")
 </td>
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## RazorExtensions - Formatação de CPF/CNPJ
+<div id="razor-extensions"></div>
+
+### RazorExtensions - Formatação de CPF/CNPJ
 
 Formatando o CPF e o CNPJ utilizando o Razor criando a classe RazorExtensions dentro da pasta Extensions:
 
-```
+```csharp
 public static class RazorExtensions
-    {
+{
         public static string FormataDocumento(this RazorPage page, int tipoFornecedor, string documento)
         {
             return tipoFornecedor == 1 ? Convert.ToInt64(documento).ToString(@"000\.000\.000\-00") : Convert.ToInt64(documento).ToString(@"00\.000\.000\/0000\-00");
         }
-    }
+}
 ```
 
 Implementar nas Views necessárias:
 
-```
+```html
 <td>
   @this.FormataDocumento(item.TipoFornecedor, item.Documento)
 </td>
@@ -780,24 +888,26 @@ Implementar nas Views necessárias:
 
 Importar a pasta Extensions na _ViewImports.cshtml
 
-```
+```html
 @using CompleteApp.App
 @using CompleteApp.App.ViewModels
 @using CompleteApp.App.Extensions
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Modal Window
+<div id="modal-window"></div>
+
+### Modal Window
 
 Nesta etapa será criado uma Modal Window para exibição e edição dos campos de endereço. Devemos adicionar uma Partial View _EditEndereco dentro de Fornecedores, ela será nossa Modal Window.
 
 Para implementar a Modal Window:
 
-```
+```html
 <div class="modal-header">
     <h4 class="modal-title">@ViewData["Title"]</h4>
     <button type="button" class="close" data-dismiss="modal">
@@ -824,13 +934,13 @@ Para implementar a Modal Window:
 </form>
 ```
 
-Deve-se criar o método EditEndereco dentro da **FornecedoresController** para retornar a Modal Window. E também o método de **POST** dentro da **FornecedoresController** para submeter a alteração do endereço.
+Deve-se criar o método EditEndereco dentro da FornecedoresController para retornar a Modal Window. E também o método de POST dentro da FornecedoresController para submeter a alteração do endereço.
 
-Inserir código Java Script dentro do arquivo **site.js** para que possamos carregar a Modal Window via **Ajax**, inserindo a **myModalContent** dentro da View Edit de Fornecedor para poder exibir o conteúdo da Modal Window.
+Inserir código Java Script dentro do arquivo site.js para que possamos carregar a Modal Window via Ajax, inserindo a myModalContent dentro da View Edit de Fornecedor para poder exibir o conteúdo da Modal Window.
 
 site.js
 
-```
+```js
 function AjaxModal() {
 
 	$(document).ready(function () {
@@ -875,17 +985,19 @@ function AjaxModal() {
 }
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Busca CEP
+<div id="busca-cep"></div>
+
+### Busca CEP
 
 Implementando o preenchimento do endereço automaticamente por meio do fornecimento do CEP. Com isso, evitamos o preenchimento de campos de forma incorreta e deixamos a busca mais segura. A implementação utiliza a consulta do webservice viacep.com.br/.
 
 site.js
 
-```
+```js
 function BuscaCep() {
     $(document).ready(function () {
 
@@ -953,21 +1065,23 @@ function BuscaCep() {
 
 Com isso, basta fazer uso do script aonde deseja implementar a busca do CEP:
 
-```
+```html
 <script>
         BuscaCep();
 </script>
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## TagHelpers
+<div id="tag-helpers"></div>
+
+### TagHelpers
 
 Implementando TagHelper customizada, classe EmailTagHelper:
 
-```
+```csharp
 namespace CompleteApp.App.Extensions.TagHelpers
 {
     public class EmailTagHelper : TagHelper
@@ -986,11 +1100,12 @@ namespace CompleteApp.App.Extensions.TagHelpers
         }
     }
 }
+
 ```
 
 Importando a TagHelper na _ViewImports.cshtml
 
-```
+```html
 @using CompleteApp.App
 @using CompleteApp.App.ViewModels
 @using CompleteApp.App.Extensions
@@ -1000,52 +1115,58 @@ Importando a TagHelper na _ViewImports.cshtml
 
 Chamar a EmailTagHelper na Layout.cshtml
 
-```
+```html
 <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - CompleteApp - <email>contato</email>
-        </div>
-    </footer>
+    <div class="container">
+       &copy; 2021 - CompleteApp - <email>contato</email>
+    </div>
+</footer>
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Fluent Validation
+### Validations e Service
+
+<div id="fluent-validation"></div>
+
+### Fluent Validation
 
 Biblioteca para validação de entidades para .NET. Instalar dentro da camada de negócios (Business)
 
-```
+```sh
 Install-Package FluentValidation
 ```
 
-O FluentValidation é uma biblioteca de validação para o .Net Framework que fornece uma interface fluente, que utiliza Expressões Lambdas para construir regras de validação para seus objetos de negócios. Este componente foi desenvolvido por um inglês chamado Jeremy Skinner e vem sendo constantemente atualizado pelo autor e outros colaboradores. 
+O FluentValidation é uma biblioteca de validação para o .Net Framework que fornece uma interface fluente, que utiliza Expressões Lambdas para construir regras de validação para seus objetos de negócios. Este componente foi desenvolvido por um inglês chamado Jeremy Skinner e vem sendo constantemente atualizado pelo autor e outros colaboradores.
 
 Fonte: https://www.devmedia.com.br/fluent-validation-biblioteca-de-validacao-revista-net-magazine-99/25658
 Creating your first validator: https://docs.fluentvalidation.net/en/latest/start.html
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Validations
+<div id="validations"></div>
 
-Criando as Validations dentro de Models para implementação das validações referente a cada entidade. Cada classe Validation deverá herdar da classe genérica  AbstractValidator<Entity>.  
+### Validations
 
-Ex: 
+Criando as Validations dentro de Models para implementação das validações referente a cada entidade. Cada classe Validation deverá herdar da classe genérica AbstractValidator.
 
-```
+```csharp
 RuleFor(f => f.Nome)
                 .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
                 .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
-## Services
+<div id="services"></div>
+
+### Services
 
 Validar as entidades do lado da camada de negócio.
 
@@ -1053,7 +1174,7 @@ Por que isso é tão importante?
 
 Os campos podem ser preenchidos com dados incorretos e inválidos e as validações da camada de apresentação não garantem a segurança das informações. Se o JavaScript for desabilitado, as informações podem ser submetidas com facilidade para a sua aplicação.
 
-Não devemos confiar nunca em dados vindos do client, devemos sempre trabalhar com validações double check, validando tanto no Front-End  quanto no Back-End.
+Não devemos confiar nunca em dados vindos do client, devemos sempre trabalhar com validações double check, validando tanto no Front-End quanto no Back-End.
 
 Devemos criar dentro da camada de Business as implementações necessárias para lidar com as regras de negócios, onde poderemos alterar o estado de uma entidade no banco por meio de uma implementação separada da camada de dados, os Services. Dentro das classes de Services teremos os métodos necessários para modificar e salvar o estado das entidades dentro do banco de dados, será uma responsabilidade única de Services, separada do Repository.
 
@@ -1061,20 +1182,24 @@ Dentro da pasta Services iremos criar as classes de serviço ProdutoService, For
 
 Também deve-se implementar interfaces referentes a cada serviço, pois dessa forma poderemos utilizar da injeção de dependência e forçaremos a implementação de um contrato, mantendo as boas práticas de programação.
 
-```
- Task Adicionar(Fornecedor fornecedor);
- Task Atualizar(Fornecedor fornecedor);
- Task Remover(Guid id);
- Task AtualizarEndereco(Endereco endereco);
+```csharp
+Task Adicionar(Fornecedor fornecedor);
+Task Atualizar(Fornecedor fornecedor);
+Task Remover(Guid id);
+Task AtualizarEndereco(Endereco endereco);
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
-	
-## Identity
 
-Para realizar o controle de acesso dos usuários na sua aplicação, nós utilizaremos o **Identity** para Registro e Login do usuário e trabalharemos com **Claims** protejendo o acesso via cookies.
+### Segurança e Autenticação do Usuário
+
+<div id="identity"></div>
+
+### Identity
+
+Para realizar o controle de acesso dos usuários na sua aplicação, nós utilizaremos o Identity para Registro e Login do usuário e trabalharemos com Claims protejendo o acesso via cookies.
 
 Para isso, teremos que criar as classes:
 
@@ -1082,60 +1207,59 @@ Para isso, teremos que criar as classes:
 - CustomAuthorization
 - RequisitoClaimFilter
 
-Devemos adicionar as Claims dentro da base de dados em **AspNetUserClaims** para cada usuário, com isso, implementar o atributo **ClaimsAuthorize** nas controllers para fazer o controle de acesso via cookie.
+Devemos adicionar as Claims dentro da base de dados em AspNetUserClaims para cada usuário, com isso, implementar o atributo ClaimsAuthorize nas controllers para fazer o controle de acesso via cookie.
 
-Implementar o [Authorize] para bloquear o acesso à classe.
-Implementar o [AllowAnonymous] para liberar o acesso às funcionalidades desejadas.
-Implementar o [ClaimsAuthorize("Fornecedor", "Adicionar")], como exemplo, para a implementação das Claims desejadas
+Implementar o [Authorize] para bloquear o acesso à classe. Implementar o [AllowAnonymous] para liberar o acesso às funcionalidades desejadas. Implementar o [ClaimsAuthorize("Fornecedor", "Adicionar")], como exemplo, para a implementação das Claims desejadas
 
-### Escondendo os botões de acesso	
-	
-Para esconder os botões que não deverão estar habilitados basta inserir nas tags o `supress-by-claim-name="Fornecedor"` e `supress-by-claim-valeu="Excluir"`.
+Escondendo os botões de acesso
 
-```
+Para esconder os botões que não deverão estar habilitados basta inserir nas tags o ```supress-by-claim-name="Fornecedor"``` e ```supress-by-claim-valeu="Excluir"```.
+
+```html
 <a class="btn btn-danger" supress-by-claim-name="Fornecedor" supress-by-claim-value="Excluir" asp-controller="Fornecedores" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
 ```
- 
-Então, para que funcione, devemos criar uma classe TagHelper que se chamará **SupressByClaimTagHelper**, herdando de TagHelper. Devemos decorar a classe com os TargetsElements abaixo:
 
-```
+Então, para que funcione, devemos criar uma classe TagHelper que se chamará SupressByClaimTagHelper, herdando de TagHelper. Devemos decorar a classe com os TargetsElements abaixo:
+
+```csharp
 [HtmlTargetElement("*", Attributes = "supress-by-claim-name")]
 [HtmlTargetElement("*", Attributes = "supress-by-claim-value")]
 ```
 
+Para desabilitar o link dos botões de acesso, devemos criar a classe TagHelper que se chamará DisableLinkByClaimTagHelper, herdando de TagHelper. Devemos decorar a classe com os TargetsElements abaixo:
 
-Para desabilitar o link dos botões de acesso, devemos criar a classe TagHelper que se chamará **DisableLinkByClaimTagHelper**, herdando de TagHelper. Devemos decorar a classe com os TargetsElements abaixo:
-
-```
+```csharp
 [HtmlTargetElement("a", Attributes = "disable-by-claim-name")]
 [HtmlTargetElement("a", Attributes = "disable-by-claim-value")]
 ```
 
-Para desabilitar os botões de acesso conforme a ação, devemos criar a classe TagHelper que se chamará **SupressElementByActionTagHelper**, herdando de TagHelper. Devemos decorar a classe com o TargetsElement abaixo:
+Para desabilitar os botões de acesso conforme a ação, devemos criar a classe TagHelper que se chamará SupressElementByActionTagHelper, herdando de TagHelper. Devemos decorar a classe com o TargetsElement abaixo:
 
-```
+```csharp
 [HtmlTargetElement("*", Attributes = "supress-by-action")]
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
-	
-## Tratamento de Erros
+
+<div id="tratamento-de-erros"></div>
+
+### Tratamento de Erros
 
 Começaremos modificando o nosso caminho de retorno de erros dentro das Configurations da Startup, dentro da classe MvcConfig. No método UseMvcConfiguration, deixaremos nosso if assim:
 
-```	
+```csharp
 if (env.IsDevelopment())
 {
-	app.UseDeveloperExceptionPage();
-	app.UseMigrationsEndPoint();
+     app.UseDeveloperExceptionPage();
+     app.UseMigrationsEndPoint();
 }
 else
 {
-	app.UseExceptionHandler("/erro/500");
-	app.UseStatusCodePagesWithRedirects("/erro/{0}");
-	app.UseHsts();
+     app.UseExceptionHandler("/erro/500");
+     app.UseStatusCodePagesWithRedirects("/erro/{0}");
+     app.UseHsts();
 }
 ```
 
@@ -1143,15 +1267,17 @@ else
 - Modificar a classe HomeController, implementando o método Errors.
 - Modificar a View Error.
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
-	
-## Evitando Falhas de Segurança
 
-Criar um arquivo web.config e configure o redirecionamento https nele por meio do **Strict-Transport-Security** conforme abaixo:
-	
-```
+<div id="evitando-falhas-de-segurança"></div>
+
+### Evitando Falhas de Segurança
+
+Criar um arquivo web.config e configure o redirecionamento https nele por meio do Strict-Transport-Security conforme abaixo:
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
 	<system.webServer>
@@ -1166,23 +1292,23 @@ Criar um arquivo web.config e configure o redirecionamento https nele por meio d
 
 Adicionar o AutoValidateAntiforgeryTokenAttribute abaixo, para que o token do seu request seja validado para toda a aplicação, dessa forma não precisaremos passar o [ValidateAntiForgeryToken] no Post de cada controller. Inserir o código dentro do MvcConfig.
 
-```
+```csharp
 o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 ```
 
-* [Voltar ao Início](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc#app-completo-em-aspnet-core-mvc)  
+<p align="right"><a href="#top">Início ↑</a></p>
 
 ---
 
 ## :vertical_traffic_light: Status do Projeto
 
-:construction: Projeto sendo implementado :construction:
+:heavy_check_mark: Concluído
 
 ---
 
 ## :thinking: Contribuindo
 
-> Para começar...
+> Passo a passo de como contribuir...
 
 ### Passo 1
 
@@ -1221,15 +1347,16 @@ Depois que seu pull request for mesclado, você pode excluir sua feature branch
 * Me chame pelo [Linkedin](https://www.linkedin.com/in/yurisiman/)  
 * Me mande um e-mail [contato@yurisiman.com.br](mailto:contato@yurisiman.com.br)  
 
-[![Github](https://img.shields.io/badge/github-profile-%237159c1?style=for-the-badge&logo=github)](https://github.com/YuriSiman)  
-[![Curriculum](https://img.shields.io/badge/site-curriculum-%23563D7C?style=for-the-badge&logo=bootstrap)](https://yurisiman.com.br)  
-
 ---
 
 ## :pencil: Licença
 
-[![License](https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github)](https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc/blob/master/LICENSE)   
+<a href="https://github.com/YuriSiman/complete-app-crud-aspnetcore-mvc/blob/master/LICENSE" target="_blank">
+  <img alt="LICENSE" src="https://img.shields.io/badge/license-mit-%23A6CE39?style=for-the-badge&logo=github" />
+</a>
 
----
+##
 
-Code your life...
+Code your life :octocat:
+
+<p align="right"><a href="#top">Início ↑</a></p>
