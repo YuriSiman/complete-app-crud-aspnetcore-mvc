@@ -171,9 +171,10 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ### Referência de Projetos
 
 Projeto - Camada Api: Referência com o projeto Business e Data  
-<img src="./readme-img/app-reference.png" />
+<img src="./readme-img/app-reference.png" />  
+<br/>
 Projeto - Camada Data: Referência com o projeto Business  
-<img src="./readme-img/data-reference.png" />
+<img src="./readme-img/data-reference.png" />  
 
 <p align="right"><a href="#top">Início ↑</a></p>
 
@@ -185,7 +186,7 @@ Projeto - Camada Data: Referência com o projeto Business
 
 Modelo Entidade-Relacionamento
 
-<img src="./readme-img/entidade-relacionamento.png" alt="Logo" width="500" height="500" />
+<img src="./readme-img/entidade-relacionamento.png" alt="MER" />
 
 <p align="right"><a href="#top">Início ↑</a></p>
 
@@ -223,7 +224,7 @@ Craindo arquivos appsettings para cada tipo de ambiente:
 
 Modificando arquivo launchSettings.json para cada tipo de ambiente:
 
-```csharp
+```json
 {
   "iisSettings": {
     "windowsAuthentication": false,
@@ -392,7 +393,7 @@ Configurando o arquivo appsettings.json
 
 Após a implementação do DbContext na Startup, é necessário passar as informações do banco de dados na ConnectionStrings dentro do arquivo appsettings.json. Essa ConnectionString possui a DefaultConnection que é chamada dentro do serviço que adiciona o seu contexto de dados na sua classe Startup.
 
-```csharp
+```json
 "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SeuDb;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
@@ -1141,8 +1142,8 @@ Install-Package FluentValidation
 
 O FluentValidation é uma biblioteca de validação para o .Net Framework que fornece uma interface fluente, que utiliza Expressões Lambdas para construir regras de validação para seus objetos de negócios. Este componente foi desenvolvido por um inglês chamado Jeremy Skinner e vem sendo constantemente atualizado pelo autor e outros colaboradores.
 
-Fonte: https://www.devmedia.com.br/fluent-validation-biblioteca-de-validacao-revista-net-magazine-99/25658
-Creating your first validator: https://docs.fluentvalidation.net/en/latest/start.html
+- Fonte: https://www.devmedia.com.br/fluent-validation-biblioteca-de-validacao-revista-net-magazine-99/25658  
+- Creating your first validator: https://docs.fluentvalidation.net/en/latest/start.html  
 
 <p align="right"><a href="#top">Início ↑</a></p>
 
